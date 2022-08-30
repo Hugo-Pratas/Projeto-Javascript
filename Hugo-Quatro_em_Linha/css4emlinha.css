@@ -1,0 +1,22 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(7, 95px);
+    grid-template-rows: repeat(6, 95px);
+    width: 45%;
+    height: 55%;
+    margin: 5% auto;
+    justify-content: center;
+    background-color: black;
+}
+.grid{
+    margin-top: 5%;
+}
+.Espaço{
+    border: 5px solid;
+    background-color: white;
+    border-radius: 50%;
+
+}
+.Espaço:hover{
+    background-color: green;
+}
