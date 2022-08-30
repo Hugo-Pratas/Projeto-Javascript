@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
+    <title>Jogo do Galo</title>
     <meta charset="UTF-8">
-    <title>Jogo Do galo</title>
+    <link rel="stylesheet" href="galo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-
+<main class="jogo">
+    <div> <input class="botão" type="button" value="."><input class="botão" type="button" value="."><input class="botão" type="button" value="."> </div>
+    <div> <input class="botão" type="button" value="."><input class="botão" type="button" value="."><input class="botão" type="button" value="."> </div>
+    <div> <input class="botão" type="button" value="."><input class="botão" type="button" value="."><input class="botão" type="button" value="."> </div>
+</main>
+<input class= "botão" type="button" value="Reiniciar" id="reiniciar">
+<h2>Jogador<br><span id="jogador"></span></h2>
+<p id="relogio"></p>
+<script src="galoScript.js"></script>
 </body>
 </html>
+
+<!--nomes dos jogadores (hugo vs fabio por exemplo);

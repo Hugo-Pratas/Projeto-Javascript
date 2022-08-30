@@ -1,0 +1,68 @@
+body {
+    background-image: url("backgroundCode.jpeg");
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+input {
+    border-radius: 10px;
+    font-size: 6vw;
+    width: 10vw;
+    height:10vw;
+}
+
+.botão {
+    border-radius: 4px;
+    margin:0.01em;
+    border: white;
+    box-sizing: border-box;
+    text-align:center;
+    position:relative;
+}
+.botão:active{
+    top:0.1em;
+}
+
+.jogo{
+    margin-top: 5%;
+    box-sizing: border-box;
+}
+
+#jogador {
+    display: inline;
+}
+
+#reiniciar {
+    font-family: 'Helvetica Neue', sans-serif;
+    box-sizing: content-box;
+    margin-top: 2%;
+    width: 8vw;
+    height:4vw;
+    font-size: 1.5vw;
+    color: black;
+}
+
+h2 {
+    position: fixed;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 3vw;
+    bottom: 2%;
+    top: 30%;
+    left: 5%;
+    right: 70%;
+    color: white;
+}
+
+p {
+    position: fixed;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    bottom: 2%;
+    top: 0;
+    left: 93%;
+    right: 5%;
+}
