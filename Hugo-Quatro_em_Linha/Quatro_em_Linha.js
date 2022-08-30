@@ -1,40 +1,91 @@
 let logos = [{
-    name: "dofus"
+    name: "dofus",
 }, {
-    name: "candy-crush"
+    name: "candy-crush",
+
 }, {
-    name: "fall-guys"
+    name: "fall-guys",
+
 }, {
-    name: "fortnite"
+    name: "fortnite",
+
 }, {
-    name: "grand-theft-auto-v"
+    name: "grand-theft-auto-v",
+
 }, {
-    name: "pokemon-go"
+    name: "pokemon-go",
 }];
 //falta verificar se os números são validos, a row so pode ser entre 3 e 10 valores
 const thisGameColumn = 3
-const thisGameRow = 10
+const thisGameRow = 4
 const totalCards = thisGameRow * thisGameColumn;
 
-if (logos.length < totalCards / 2) {
+if (logos.length < totalCards / 2) { //popular a lista de logos se tiver logos insuficientes para o numero de cartas
     let i = logos.length;
     while (logos.length < totalCards / 2) {
         i--;
         logos.push(logos[i])
-        if (i===0){
-            i=logos.length;
+        if (i === 0) {
+            i = logos.length;
         }
     }
 }
-const thisGameLogos = shuffle(getDuplicatedLogos(logos, totalCards / 2));
-document.write(populateGridHtml(thisGameColumn, thisGameRow, thisGameLogos))
+
+let thisGameLogos = shuffle(getDuplicatedLogos(logos, totalCards / 2));
+let thisGameMap = [];
+for (let i = 0; i < thisGameLogos.length; i++) {
+    thisGameMap.push({
+        name: thisGameLogos[i],
+        id: i,
+        won: false
+    })
+}
+document.write(populateGridHtml(thisGameColumn, thisGameRow, thisGameMap))
 const card = $(".card");
+let previousCardId = -1;
+let isFlipping = false;
 
 card.on('click', function (e) {
-    $(e.currentTarget).addClass('selected');
-    //$(this).addClass('selected');  <- outra maneira de fazer
-});
+    if (!isFlipping) {
+        let currentCard = $(e.currentTarget);
+        let cardId = currentCard.attr('id');
 
+        if (cardId===previousCardId || thisGameMap[cardId].won){
+            return;
+        }
+        currentCard.addClass('selected');
+        //$(this).addClass('selected');  <- outra maneira de fazer
+
+
+        if (previousCardId < 0) {
+            previousCardId = cardId;
+        } else {
+            if (thisGameMap[previousCardId].name===thisGameMap[cardId].name){
+                thisGameMap[previousCardId].won=true;
+                thisGameMap[cardId].won=true;
+                previousCardId = -1;
+                for (const thisGameMapElement of thisGameMap) {
+                    if (!thisGameMapElement.won){
+                        return;
+                    }
+                }
+
+                setTimeout(() => {
+                    alert("ganhou");
+                },200)
+            }else {
+                isFlipping = true;
+                setTimeout(function () {
+                    $('#' + previousCardId).removeClass('selected');
+                    currentCard.removeClass('selected');
+                    previousCardId = -1;
+                    isFlipping=false;
+                }, 600)
+            }
+        }
+    }
+
+});
 
 function populateGridHtml(column, row, arrayOfLogos) {
     const cards = column * row;
@@ -45,13 +96,12 @@ function populateGridHtml(column, row, arrayOfLogos) {
 
     for (let i = 0; i < cards; i++) {
         finalstring += `
-<div class="card" id="${i}">
+<div class="card" id="${arrayOfLogos[i].id}">
     <div class="card_inner">
         <div class="card_front">
             <h1>?</h1>
         </div>
-        <div class="card_back">
-            <div class="${arrayOfLogos[i]}"></div>
+        <div class="card_back ${arrayOfLogos[i].name}">
         </div>
     </div>
 </div>
@@ -64,7 +114,7 @@ function populateGridHtml(column, row, arrayOfLogos) {
 function getDuplicatedLogos(arr_logos, numberOfLogos) {
 
     let arr_final = [];
-    if (arr_logos.length>numberOfLogos){
+    if (arr_logos.length > numberOfLogos) {
         arr_logos = shuffle(arr_logos); //para ter logos diferentes todos os jogos
     }
 
