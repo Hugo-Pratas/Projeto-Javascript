@@ -6,7 +6,7 @@ body {
     text-align: center;
 }
 
-input {
+.botão {
     border-radius: 10px;
     font-size: 6vw;
     width: 10vw;
@@ -74,4 +74,82 @@ p {
     right: 10%;
     width: 10vw;
     height: 10vw;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+h5 {
+    padding-top: 1%;
+    margin-bottom: auto;
+}
+
+form{
+    height: auto;
+    min-height: 20vw;
+    width: 25vw;
+    background-color: rgba(40,45,53,1);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 2px 2px 2px 2px;
+}
+
+form *{
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    alignment: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+label {
+    display: flex;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#nomejogador1 {
+    display: flex;
+    height: 70%;
+    width: 80%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 2vh auto auto auto;
+}
+::placeholder{
+    color: grey;
+}
+#nomejogador2 {
+    display: flex;
+    width: 80%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 2vh auto 15vh auto;
+}
+
+#container {
+    position: absolute;
+    backdrop-filter: blur(15px);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
 }
