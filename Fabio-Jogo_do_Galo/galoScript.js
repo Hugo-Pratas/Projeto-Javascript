@@ -10,26 +10,27 @@ let vencedor = '.'; //Define se há um vencedor ou não (. = indefinido; X = jog
 
 let inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
 //localStorage.setItem("inicioContador", inicioContador); // Store it if I want to restart the timer on the next page
+let intervalo = setInterval(contadorTempo, 1000);
+
+contadorTempo();
 
 function contadorTempo() {
     let agora = Math.floor(Date.now() / 1000); // get the time now
     let diferenca = agora - inicioContador; // diff in seconds between now and start
     let m = Math.floor(diferenca / 60); // get minutes value (quotient of diff)
     let s = Math.floor(diferenca % 60); // get seconds value (remainder of diff)
-    m = verTempo(m); // add a leading zero if it's single digit
-    s = verTempo(s); // add a leading zero if it's single digit
+    m = addZeroContador(m); // add a leading zero if it's single digit
+    s = addZeroContador(s); // add a leading zero if it's single digit
     document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
-    let t = setTimeout(contadorTempo, 500); // set a timeout to update the timer
+    //let t = setTimeout(contadorTempo, 500); // set a timeout to update the timer
 }
 
-function verTempo(i) {
+function addZeroContador(i) {
     if (i < 10) {
         i = "0" + i
     }  // add zero in front of numbers < 10
     return i;
 }
-
-contadorTempo();
 
 //Área do jogo toda com fundo branco e texto branco para não se ver
 function botoesBrancos() {
@@ -48,7 +49,10 @@ for (let i = 0; i < 9; i++) {
             event.target.value = jogador; //preenche a casa com X ou O
             event.target.style.color = '#bc5e00'; //torna o valor da casa visível (X ou O)
             trocarJogador(); //função que troca a vez do jogador
-            vencedor = vitoria(); //Executa a função vitoria() que defineremos depois
+            vencedor = vitoria(); //Executa a função vitoria()
+            if (vencedor !== ".") {
+                clearInterval(intervalo);
+            }
         }
     });
 }
@@ -67,7 +71,7 @@ let sortearJogador = function () {
 }
 sortearJogador(); //Escolhe aleatoriamento o jogador inicial
 
-botaoReiniciar.addEventListener('click', (event) = function () {
+botaoReiniciar.addEventListener('click', (function () {
     for (let i = 0; i < 9; i++) {
         casas[i].value = '.'; //Limpa todas as casas
         casas[i].style.color = '#FFFFFF'; //Torna o valor . invisível (branco)
@@ -75,9 +79,11 @@ botaoReiniciar.addEventListener('click', (event) = function () {
     }
     inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
     contadorTempo();
+    clearInterval(intervalo);
+    intervalo = setInterval(contadorTempo, 1000);
     vencedor = '.'; //Reset ao vencedor
     sortearJogador(); //Escolhe aleatoriamente que jogador irá começar
-});
+}));
 
 //Alterna a vez entre os jogadores X e Y (preenche dentro de cada botão A BRANCO, com a letra do jogador correspondente)
 let trocarJogador = function () {
