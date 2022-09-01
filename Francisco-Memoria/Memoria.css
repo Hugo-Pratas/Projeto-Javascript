@@ -1,12 +1,26 @@
+#game {
+    width: 100vw;
+}
+
 .game_box {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
-    width: 50%;
+    max-width: 800px;
+    width: 80%;
     display: grid;
     background-color: #0B0B0C;
     padding: 0.5em;
     gap: 0.5em;
+}
+
+#menu{
+    background-color: aliceblue;
+    height: 100%;
+    padding: 0.5em;
+    display: block;
+    width: 15%;
+    border-color: aqua;
+    border-radius: 10px;
 }
 ._3lines {
     grid-template-columns: 1fr 1fr 1fr;
