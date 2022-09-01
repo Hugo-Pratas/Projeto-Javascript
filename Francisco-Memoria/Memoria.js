@@ -45,44 +45,42 @@ $("#game").append(populateGridHtml(thisGameColumn, thisGameRow, thisGameMap));
 
 let inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
 //localStorage.setItem("inicioContador", inicioContador); // Store it if I want to restart the timer on the next page
-//contadorTempo();
+let intervalo = setInterval(contadorTempo, 1000);
+contadorTempo();
+//clearInterval(intervalo);
 
 const card = $(".card");
-let previousCardId = -1;
-let isFlipping = false;
+let previousCardId = -1; //start with value out of the array
+let isFlipping = false; //to prevent multiple flips at the same time
 
 card.on('click', function (e) {
     if (!isFlipping) {
         let currentCard = $(e.currentTarget);
         let cardId = currentCard.attr('id');
-
-        if (cardId===previousCardId || thisGameMap[cardId].won){
+        if (cardId===previousCardId || thisGameMap[cardId].won){ //prevent selecting the same card, or cards already won
             return;
         }
         currentCard.addClass('selected');
         //$(this).addClass('selected');  <- outra maneira de fazer
-
-
-        if (previousCardId < 0) {
+        if (previousCardId < 0) { //if no card has been input, input this one
             previousCardId = cardId;
         } else {
-            if (thisGameMap[previousCardId].name===thisGameMap[cardId].name){
+            if (thisGameMap[previousCardId].name===thisGameMap[cardId].name){ //previous card = thisCard
                 thisGameMap[previousCardId].won=true;
                 thisGameMap[cardId].won=true;
                 previousCardId = -1;
                 for (const thisGameMapElement of thisGameMap) {
-                    if (!thisGameMapElement.won){
+                    if (!thisGameMapElement.won){ //break function if we not won
                         return;
                     }
                 }
-
-                setTimeout(() => {
+                setTimeout(() => { //prevent alert hapenning before final card turn
                     alert("ganhou");
                 },200)
             }else {
                 isFlipping = true;
                 setTimeout(function () {
-                    $('#' + previousCardId).removeClass('selected');
+                    $('#' + previousCardId).removeClass('selected'); //remove flips
                     currentCard.removeClass('selected');
                     previousCardId = -1;
                     isFlipping=false;
@@ -95,7 +93,7 @@ card.on('click', function (e) {
 
 function populateGridHtml(column, row, arrayOfLogos) {
     const cards = column * row;
-    if (cards % 2 !== 0) {
+    if (cards % 2 !== 0) { //to prevent errors, maybe remove latter
         return "Not even"
     }
     let finalstring = `<div class="game_box _${row}lines">`
@@ -123,7 +121,6 @@ function getDuplicatedLogos(arr_logos, numberOfLogos) {
     if (arr_logos.length > numberOfLogos) {
         arr_logos = shuffle(arr_logos); //para ter logos diferentes todos os jogos
     }
-
 
     for (let i = 0; i < numberOfLogos; i++) {
         arr_final.push(arr_logos[i].name)
@@ -165,6 +162,24 @@ function contadorTempo() {
 }
 
 function verTempo(i) {
+    if (i < 10) {
+        i = "0" + i
+    }  // add zero in front of numbers < 10
+    return i;
+}
+
+function contadorTempo() {
+    let agora = Math.floor(Date.now() / 1000); // get the time now
+    let diferenca = agora - inicioContador; // diff in seconds between now and start
+    let m = Math.floor(diferenca / 60); // get minutes value (quotient of diff)
+    let s = Math.floor(diferenca % 60); // get seconds value (remainder of diff)
+    m = addZeroContador(m); // add a leading zero if it's single digit
+    s = addZeroContador(s); // add a leading zero if it's single digit
+    document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
+    //let t = setTimeout(contadorTempo, 500); // set a timeout to update the timer
+}
+
+function addZeroContador(i) {
     if (i < 10) {
         i = "0" + i
     }  // add zero in front of numbers < 10

@@ -15,12 +15,13 @@
 
 #menu{
     background-color: aliceblue;
-    height: 100%;
     padding: 0.5em;
-    display: block;
     width: 15%;
-    border-color: aqua;
     border-radius: 10px;
+}
+
+#menu #relogio{
+    text-align: center;
 }
 ._3lines {
     grid-template-columns: 1fr 1fr 1fr;
