@@ -11,8 +11,35 @@ let vencedor = '.'; //Define se há um vencedor ou não (. = indefinido; X = jog
 let inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
 //localStorage.setItem("inicioContador", inicioContador); // Store it if I want to restart the timer on the next page
 let intervalo = setInterval(contadorTempo, 1000);
+let jogador1;
+let jogador2;
 
-contadorTempo();
+function verificarNomes () {
+        $('#submit').click(function aceitarNomes () {
+            jogador1 = document.getElementById("nomejogador1").value
+            jogador2 = document.getElementById("nomejogador2").value
+            if (!charIsLetter(Array.from(jogador1)) || !charIsLetter(Array.from(jogador2))) {
+                return
+            }
+            inicioContador = Math.floor(Date.now() / 1000);
+            contadorTempo();
+            clearInterval(intervalo);
+            intervalo = setInterval(contadorTempo, 1000);
+            $('#form').css("display", "none");
+            $('#container').css("display", "none");
+            sortearJogador(jogador1, jogador2); //Escolhe aleatoriamento o jogador inicial
+        });
+}
+verificarNomes()
+
+function charIsLetter(char) {
+    for (const charElement of char) {
+        console.log(charElement)
+        if (typeof charElement !== 'string') {
+            return false;
+        } return charElement.toLowerCase() !== charElement.toUpperCase();
+    }
+}
 
 function contadorTempo() {
     let agora = Math.floor(Date.now() / 1000); // get the time now
@@ -35,7 +62,7 @@ function addZeroContador(i) {
 //Área do jogo toda com fundo branco e texto branco para não se ver
 function botoesBrancos() {
     for (let i = 0; i < 9; i++) {
-        casas[i].style.color = '#FFFFFF'; //Torna o valor _ invisível
+        casas[i].style.color = '#FFFFFF'; //Torna o valor . invisível
         casas[i].style.backgroundColor = '#FFFFFF';
     }
 }
@@ -48,53 +75,53 @@ for (let i = 0; i < 9; i++) {
         if ((event.target.value === '.') && (vencedor === '.')) {
             event.target.value = jogador; //preenche a casa com X ou O
             event.target.style.color = '#bc5e00'; //torna o valor da casa visível (X ou O)
-            trocarJogador(); //função que troca a vez do jogador
             vencedor = vitoria(); //Executa a função vitoria()
             if (vencedor !== ".") {
                 clearInterval(intervalo);
-            }
+            } else trocarJogador(); //função que troca a vez do jogador
         }
     });
 }
 
 //Decide aleatoriamente o jogador a fazer a primeira jogada
-let sortearJogador = function () {
+let sortearJogador = function (nomeJogador1, nomeJogador2) {
     if (Math.floor(Math.random() * 2) === 0) {
         jogador = "O";
-        idJogador.innerText = "O";
+        idJogador.innerText = nomeJogador1 + " (" + jogador + ") ";
         idJogador.style.color = '#ffffff';
     } else {
-        jogador = "X";
-        idJogador.innerText = "X";
+        jogador = "X"
+        idJogador.innerText = nomeJogador2 + " (" + jogador + ") ";
         idJogador.style.color = '#ffffff';
     }
 }
-sortearJogador(); //Escolhe aleatoriamento o jogador inicial
+sortearJogador(); //Escolhe aleatoriamente o jogador inicial
 
 botaoReiniciar.addEventListener('click', (function () {
     for (let i = 0; i < 9; i++) {
         casas[i].value = '.'; //Limpa todas as casas
         casas[i].style.color = '#FFFFFF'; //Torna o valor . invisível (branco)
         casas[i].style.backgroundColor = '#FFFFFF'; //Torna o fundo branco
+        casas[i].disabled = false;
     }
     inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
     contadorTempo();
     clearInterval(intervalo);
     intervalo = setInterval(contadorTempo, 1000);
     vencedor = '.'; //Reset ao vencedor
-    sortearJogador(); //Escolhe aleatoriamente que jogador irá começar
+    sortearJogador(jogador1, jogador2); //Escolhe aleatoriamente que jogador irá começar
 }));
 
 //Alterna a vez entre os jogadores X e Y (preenche dentro de cada botão A BRANCO, com a letra do jogador correspondente)
 let trocarJogador = function () {
     if (jogador === 'X') {
         jogador = 'O';
-        idJogador.innerText = 'O';
+        idJogador.innerText = jogador1 + " (" + jogador + ") ";
         idJogador.style.color = '#ffffff';
 
     } else {
         jogador = 'X';
-        idJogador.innerText = 'X';
+        idJogador.innerText = jogador2 + " (" + jogador + ") ";
         idJogador.style.color = '#ffffff';
     }
 }
@@ -133,7 +160,6 @@ let vitoria = function () {
         casas[4].style.backgroundColor = '#0F0';
         casas[7].style.backgroundColor = '#0F0';
 
-
         return casas[1].value;
 
     } else if ((casas[2].value === casas[5].value) && (casas[5].value === casas[8].value) && casas[2].value !== '.') {
@@ -142,6 +168,7 @@ let vitoria = function () {
         casas[8].style.backgroundColor = '#0F0';
 
         return casas[2].value;
+
     } else if ((casas[0].value === casas[4].value) && (casas[4].value === casas[8].value) && casas[0].value !== '.') {
         casas[0].style.backgroundColor = '#0F0';
         casas[4].style.backgroundColor = '#0F0';
@@ -162,6 +189,7 @@ let vitoria = function () {
             casas[i].value = '.'; //Limpa todas as casas
             casas[i].style.color = "#8E1600"; //Torna o valor . invisível
             casas[i].style.backgroundColor = "#8E1600"; //Torna o fundo vermelho
+            casas[i].disabled = true;
         }
     }
     return '.';

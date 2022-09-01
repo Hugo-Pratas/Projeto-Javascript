@@ -76,16 +76,27 @@ p {
     height: 10vw;
 }
 
+#gif2 {
+    position: fixed;
+    bottom: 10%;
+    top: 75%;
+    left: 10%;
+    right: 99%;
+    width: 8vw;
+    height: 8vw;
+}
+
 h3 {
     font-size: 25px;
 }
 
 h5 {
     padding-top: 1%;
+    padding-bottom: 5%;
     margin-bottom: auto;
 }
 
-form{
+#form{
     height: auto;
     min-height: 20vw;
     width: 25vw;
@@ -100,7 +111,7 @@ form{
     padding: 2px 2px 2px 2px;
 }
 
-form *{
+#form *{
     font-family: 'Helvetica Neue', sans-serif;
     color: #ffffff;
     outline: none;
@@ -152,4 +163,18 @@ label {
     width: 100vw;
     height: 100vh;
     top: 0;
+}
+
+#submit {
+    background-color: grey;
+    color: #eee;
+    border: none;
+    margin: auto auto 30%;
+    width: 10vw;
+    height: 5vh;
+    font-size: 1.5vw;
+}
+
+#submit:hover {
+    background-color: forestgreen;
 }
