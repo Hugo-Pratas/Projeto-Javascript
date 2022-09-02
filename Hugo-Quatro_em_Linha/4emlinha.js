@@ -7,6 +7,58 @@ let ready = $(document).ready(function(){
     colors[-1]= "yellow";
     colors[1]="red";
     let count = 0;
+    let inicioContador = Math.floor(Date.now() / 1000);
+    let intervalo = setInterval(contadorTempo, 1000);
+
+    function verificarNomes () {
+        $('#submit').click(function aceitarNomes () {
+            jogador1 = document.getElementById("nomejogador1").value
+            jogador2 = document.getElementById("nomejogador2").value
+            if (!charIsLetter(Array.from(jogador1)) || !charIsLetter(Array.from(jogador2))) {
+                console.log("erro")
+                return
+            }
+            inicioContador = Math.floor(Date.now() / 1000);
+            contadorTempo();
+            clearInterval(intervalo);
+            intervalo = setInterval(contadorTempo, 1000);
+            contadorTempo();
+            $('#form').css("display", "none");
+            $('#container').css("display", "none");
+        });
+    }
+    verificarNomes()
+
+    function charIsLetter(char) {
+        for (const charElement of char) {
+            console.log(charElement)
+            if (typeof charElement !== 'string') {
+                return false;
+            } return charElement.toLowerCase() !== charElement.toUpperCase();
+        }
+    }
+
+
+
+
+    function contadorTempo() {
+        let agora = Math.floor(Date.now() / 1000); // get the time now
+        let diferenca = agora - inicioContador; // diff in seconds between now and start
+        let m = Math.floor(diferenca / 60); // get minutes value (quotient of diff)
+        let s = Math.floor(diferenca % 60); // get seconds value (remainder of diff)
+        m = addZeroContador(m); // add a leading zero if it's single digit
+        s = addZeroContador(s); // add a leading zero if it's single digit
+        document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
+
+    }
+
+    function addZeroContador(i) {
+        if (i < 10) {
+            i = "0" + i
+        }  // add zero in front of numbers < 10
+        return i;
+    }
+
 
     $(".Espaço").each(function (){
         $(this).attr("id",count);
@@ -18,24 +70,15 @@ let ready = $(document).ready(function(){
                 const id = Number( $(this).attr("id"))
                 const coluna = id % numberOfLines
                 const linha = parseInt(id / numberOfLines)
-                console.log("linha",linha)
-                console.log("coluna",coluna)
-
                 let lastElementAvailable ;
+
                 for(let i = 0 ; i < 6; i++){
-                    console.log("index",i)
-                    console.log("coluna",coluna)
-                    console.log("id",getId(i,coluna))
                     const currentElement = $("#" + getId(i,coluna));
                     if(currentElement.attr("data-player") === "0"){
                         lastElementAvailable = currentElement;
                     }
                 }
 
-
-
-                console.log(linha)
-                console.log(coluna)
                 $(lastElementAvailable).css("background-color",colors[player]);
                 $(lastElementAvailable).attr("data-player",player);
                 if(checkWin(player)){
@@ -51,6 +94,10 @@ let ready = $(document).ready(function(){
     });
 
     $("#restart").click(function (){
+        inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
+        contadorTempo();
+        clearInterval(intervalo);
+        intervalo = setInterval(contadorTempo, 1000);
         limparjogo();
     });
     function getId(linha,coluna){
@@ -90,6 +137,7 @@ let ready = $(document).ready(function(){
                     filas = 0;
                 }
                 if(filas >= 4){
+                    clearInterval(intervalo)
                     return true;
                 }
             }
@@ -106,6 +154,7 @@ let ready = $(document).ready(function(){
                     filas = 0;
                 }
                 if(filas >= 4){
+                    clearInterval(intervalo)
                     return true;
                 }
             }
@@ -122,12 +171,14 @@ let ready = $(document).ready(function(){
                     && $("#"+ (topLeft + 8)).attr("data-player") == p
                     && $("#"+ (topLeft + 16)).attr("data-player") == p
                     && $("#"+ (topLeft + 24)).attr("data-player") == p) {
+                    clearInterval(intervalo)
                     return true;
                 }
                 if($("#" + topRight).attr("data-player") == p
                     && $("#"+ (topRight + 6)).attr("data-player") == p
                     && $("#"+ (topRight + 12)).attr("data-player") == p
                     && $("#"+ (topRight + 18)).attr("data-player") == p){
+                    clearInterval(intervalo)
                     return true;
                 }
 
