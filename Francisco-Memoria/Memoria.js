@@ -47,7 +47,6 @@ let inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (rig
 //localStorage.setItem("inicioContador", inicioContador); // Store it if I want to restart the timer on the next page
 let intervalo = setInterval(contadorTempo, 1000);
 contadorTempo();
-//clearInterval(intervalo);
 
 const card = $(".card");
 let previousCardId = -1; //start with value out of the array
@@ -65,6 +64,7 @@ card.on('click', function (e) {
         if (previousCardId < 0) { //if no card has been input, input this one
             previousCardId = cardId;
         } else {
+            addTriestoMenu();
             if (thisGameMap[previousCardId].name===thisGameMap[cardId].name){ //previous card = thisCard
                 thisGameMap[previousCardId].won=true;
                 thisGameMap[cardId].won=true;
@@ -74,6 +74,7 @@ card.on('click', function (e) {
                         return;
                     }
                 }
+                clearInterval(intervalo);
                 setTimeout(() => { //prevent alert hapenning before final card turn
                     alert("ganhou");
                 },200)
@@ -148,19 +149,6 @@ function shuffle(array) { //https://stackoverflow.com/questions/2450954/how-to-r
     return array;
 }
 
-
-
-function contadorTempo() {
-    let agora = Math.floor(Date.now() / 1000); // get the time now
-    let diferenca = agora - inicioContador; // diff in seconds between now and start
-    let m = Math.floor(diferenca / 60); // get minutes value (quotient of diff)
-    let s = Math.floor(diferenca % 60); // get seconds value (remainder of diff)
-    m = verTempo(m); // add a leading zero if it's single digit
-    s = verTempo(s); // add a leading zero if it's single digit
-    document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
-    let t = setTimeout(contadorTempo, 500); // set a timeout to update the timer
-}
-
 function verTempo(i) {
     if (i < 10) {
         i = "0" + i
@@ -184,4 +172,10 @@ function addZeroContador(i) {
         i = "0" + i
     }  // add zero in front of numbers < 10
     return i;
+}
+function addTriestoMenu(){
+    const tentativas = $("#tentativas");
+    const tentativas_text = tentativas.html();
+    currentTry = Number(tentativas_text.split(" ").at(3));
+    tentativas.text(tentativas_text.replace(currentTry, currentTry+1))
 }

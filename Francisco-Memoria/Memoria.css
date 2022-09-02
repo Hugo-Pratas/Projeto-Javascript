@@ -4,7 +4,7 @@
 
 .game_box {
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 6%;
     max-width: 800px;
     width: 80%;
     display: grid;
@@ -14,13 +14,26 @@
 }
 
 #menu{
+    margin-right: 5%;
+    margin-left: 0%;
     background-color: aliceblue;
     padding: 0.5em;
-    width: 15%;
+    width: 25%;
     border-radius: 10px;
 }
 
-#menu #relogio{
+#menu #logo{
+    width: 100%;
+    height: 100%;
+    background-image: url("img/Memory_Logo.png");
+    background-size: cover;
+    display: block;
+    aspect-ratio: 1;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+#menu {
     text-align: center;
 }
 ._3lines {
