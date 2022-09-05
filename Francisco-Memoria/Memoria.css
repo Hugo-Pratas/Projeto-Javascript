@@ -1,4 +1,107 @@
+#container {
+    position: absolute;
+    backdrop-filter: blur(15px);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+}
+#submit {
+    background-color: grey;
+    color: #eee;
+    border: none;
+    margin: auto auto auto auto;
+    width: 10vw;
+    height: 5vh;
+    font-size: 1.5vw;
+}
+
+#submit:hover {
+    background-color: forestgreen;
+}
+
+#form{
+
+    height: auto;
+    min-height: 20vw;
+    width: 100vw;
+    max-width: 500px;
+    background-color: rgba(40,45,53,1);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10%;
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 2vh 2vw 2vh 2vw;
+}
+
+#form *{
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    alignment: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#form label {
+    display: flex;
+    text-align: center;
+    margin-top: 5%;
+    font-size: 14px;
+    font-weight: 500;
+
+}
+#nomejogador1 {
+    display: flex;
+    height: 70%;
+    width: 80%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 2vh auto 5vh auto;
+
+}
+
+#numeroDeColunas{
+    display: flex;
+    height: 70%;
+    width: 30%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 2vh auto 5vh auto;
+}
+
+#numeroDeLinhas{
+    display: flex;
+    height: 70%;
+    width: 30%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 2vh auto 5vh auto;
+}
+
+
+::placeholder{
+    color: grey;
+}
+
 #game {
+    margin-top: 3%;
     width: 100vw;
 }
 
@@ -15,7 +118,7 @@
 
 #menu{
     margin-right: 5%;
-    margin-left: 0%;
+    margin-top: 2%;
     background-color: aliceblue;
     padding: 0.5em;
     width: 25%;

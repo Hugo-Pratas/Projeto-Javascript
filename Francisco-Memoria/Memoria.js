@@ -15,82 +15,123 @@ let logos = [{
 }, {
     name: "pokemon-go",
 }];
-//falta verificar se os números são validos, a row so pode ser entre 3 e 10 valores
-const thisGameColumn = 3
-const thisGameRow = 4
-const totalCards = thisGameRow * thisGameColumn;
+let inicioContador = 0; //Get the starting time (right now) in seconds
+//localStorage.setItem("inicioContador", inicioContador); // Store it if I want to restart the timer on the next page
+let intervalo = 0;
+let gamerName = "";
+let thisGameColumn = 3
+let thisGameRow = 4
+popUP();
 
-if (logos.length < totalCards / 2) { //popular a lista de logos se tiver logos insuficientes para o numero de cartas
-    let i = logos.length;
-    while (logos.length < totalCards / 2) {
-        i--;
-        logos.push(logos[i])
-        if (i === 0) {
-            i = logos.length;
+
+function game() {
+//falta verificar se os números são validos, a row so pode ser entre 3 e 10 valores
+
+    const totalCards = thisGameRow * thisGameColumn;
+
+    if (logos.length < totalCards / 2) { //popular a lista de logos se tiver logos insuficientes para o numero de cartas
+        let i = logos.length;
+        while (logos.length < totalCards / 2) {
+            i--;
+            logos.push(logos[i])
+            if (i === 0) {
+                i = logos.length;
+            }
         }
     }
-}
 
-let thisGameLogos = shuffle(getDuplicatedLogos(logos, totalCards / 2));
-let thisGameMap = [];
-for (let i = 0; i < thisGameLogos.length; i++) {
-    thisGameMap.push({
-        name: thisGameLogos[i],
-        id: i,
-        won: false
-    })
-}
+    let thisGameLogos = shuffle(getDuplicatedLogos(logos, totalCards / 2));
+    let thisGameMap = [];
+    for (let i = 0; i < thisGameLogos.length; i++) {
+        thisGameMap.push({
+            name: thisGameLogos[i], id: i, won: false
+        })
+    }
 
-$("#game").append(populateGridHtml(thisGameColumn, thisGameRow, thisGameMap));
+    $("#game").append(populateGridHtml(thisGameColumn, thisGameRow, thisGameMap));
 
-let inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
-//localStorage.setItem("inicioContador", inicioContador); // Store it if I want to restart the timer on the next page
-let intervalo = setInterval(contadorTempo, 1000);
-contadorTempo();
+    contadorTempo();
 
-const card = $(".card");
-let previousCardId = -1; //start with value out of the array
-let isFlipping = false; //to prevent multiple flips at the same time
+    const card = $(".card");
+    let previousCardId = -1; //start with value out of the array
+    let isFlipping = false; //to prevent multiple flips at the same time
 
-card.on('click', function (e) {
-    if (!isFlipping) {
-        let currentCard = $(e.currentTarget);
-        let cardId = currentCard.attr('id');
-        if (cardId===previousCardId || thisGameMap[cardId].won){ //prevent selecting the same card, or cards already won
-            return;
-        }
-        currentCard.addClass('selected');
-        //$(this).addClass('selected');  <- outra maneira de fazer
-        if (previousCardId < 0) { //if no card has been input, input this one
-            previousCardId = cardId;
-        } else {
+
+    card.on('click', function (e) {
+        if (!isFlipping) {
+            let currentCard = $(e.currentTarget);
+            let cardId = currentCard.attr('id');
+            if (cardId === previousCardId || thisGameMap[cardId].won) { //prevent selecting the same card, or cards already won
+                return;
+            }
+            currentCard.addClass('selected');
+            //$(this).addClass('selected');  <- outra maneira de fazer
+            if (previousCardId < 0) { //if no card has been input, input this one
+                previousCardId = cardId;
+                return;
+            }
             addTriestoMenu();
-            if (thisGameMap[previousCardId].name===thisGameMap[cardId].name){ //previous card = thisCard
-                thisGameMap[previousCardId].won=true;
-                thisGameMap[cardId].won=true;
+            if (thisGameMap[previousCardId].name === thisGameMap[cardId].name) { //previous card = thisCard
+                thisGameMap[previousCardId].won = true;
+                thisGameMap[cardId].won = true;
                 previousCardId = -1;
-                for (const thisGameMapElement of thisGameMap) {
-                    if (!thisGameMapElement.won){ //break function if we not won
+                for (const thisGameMapElement of thisGameMap) { //check if we win
+                    if (!thisGameMapElement.won) { //return function if we not won
                         return;
                     }
                 }
                 clearInterval(intervalo);
                 setTimeout(() => { //prevent alert hapenning before final card turn
                     alert("ganhou");
-                },200)
-            }else {
+                }, 200)
+            } else {
                 isFlipping = true;
                 setTimeout(function () {
                     $('#' + previousCardId).removeClass('selected'); //remove flips
                     currentCard.removeClass('selected');
                     previousCardId = -1;
-                    isFlipping=false;
+                    isFlipping = false;
                 }, 600)
             }
         }
-    }
 
-});
+
+    });
+}
+
+function popUP() {
+    $('#submit').click(function aceitarNomes() {
+        gamerName = $("#nomejogador1").val();
+        rowNumber = $("#numeroDeLinhas").val();
+        if (!charIsLetter(Array.from(gamerName))) {
+            return
+        }
+
+        if (rowNumber > 10 || rowNumber < 3) {
+            return;
+        }
+        thisGameColumn = $("#numeroDeColunas").val();
+        thisGameRow = rowNumber
+        addNametoMenu(gamerName);
+        inicioContador = Math.floor(Date.now() / 1000);
+        clearInterval(intervalo);
+        intervalo = setInterval(contadorTempo, 1000);
+        $('#form').css("display", "none");
+        $('#container').css("display", "none");
+        game();
+    });
+}
+
+function charIsLetter(char) {
+    for (const charElement of char) {
+        if (typeof charElement !== 'string') {
+            return false;
+        } else if (charElement.toLowerCase() === charElement.toUpperCase()) {
+            return false
+        }
+    }
+    return true;
+}
 
 function populateGridHtml(column, row, arrayOfLogos) {
     const cards = column * row;
@@ -142,8 +183,7 @@ function shuffle(array) { //https://stackoverflow.com/questions/2450954/how-to-r
         currentIndex--;
 
         // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
 
     return array;
@@ -173,9 +213,17 @@ function addZeroContador(i) {
     }  // add zero in front of numbers < 10
     return i;
 }
-function addTriestoMenu(){
+
+function addTriestoMenu() {
     const tentativas = $("#tentativas");
     const tentativas_text = tentativas.html();
     currentTry = Number(tentativas_text.split(" ").at(3));
-    tentativas.text(tentativas_text.replace(currentTry, currentTry+1))
+    tentativas.text(tentativas_text.replace(currentTry, currentTry + 1))
 }
+
+function addNametoMenu(nameOfPlayer) {
+    const name = $("#nome");
+    name.append(" " + nameOfPlayer);
+    return;
+}
+
