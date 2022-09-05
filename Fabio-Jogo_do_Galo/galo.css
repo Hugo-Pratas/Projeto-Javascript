@@ -66,6 +66,17 @@ p {
     right: 5%;
 }
 
+#scoreboard {
+    position: fixed;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    bottom: 0%;
+    top: 50%;
+    left: 93%;
+    right: 5%;
+}
+
 #gif {
     position: fixed;
     bottom: 50%;
@@ -109,6 +120,7 @@ h5 {
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 2px 2px 2px 2px;
+    overflow: hidden;
 }
 
 #form *{

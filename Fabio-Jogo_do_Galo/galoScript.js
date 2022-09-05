@@ -14,6 +14,7 @@ let intervalo = setInterval(contadorTempo, 1000);
 let jogador1;
 let jogador2;
 
+
 function verificarNomes () {
         $('#submit').click(function aceitarNomes () {
             jogador1 = document.getElementById("nomejogador1").value
@@ -49,6 +50,7 @@ function contadorTempo() {
     m = addZeroContador(m); // add a leading zero if it's single digit
     s = addZeroContador(s); // add a leading zero if it's single digit
     document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
+    return [m, s]
     //let t = setTimeout(contadorTempo, 500); // set a timeout to update the timer
 }
 
@@ -77,11 +79,38 @@ for (let i = 0; i < 9; i++) {
             event.target.style.color = '#bc5e00'; //torna o valor da casa visível (X ou O)
             vencedor = vitoria(); //Executa a função vitoria()
             if (vencedor !== ".") {
+                let historicoTempo = contadorTempo().join(":");
+                let listaHistorico = {
+                    vencedor: idJogador.innerText,
+                    tempo: historicoTempo,
+                }
+                let arrayHistorico = [];
+                let historico = window.localStorage.getItem("Histórico");
+                if (historico !== null) {
+                    historico = JSON.parse(historico);
+                    arrayHistorico = historico
+                }
+                arrayHistorico.push(listaHistorico);
+                window.localStorage.setItem("Histórico", JSON.stringify(arrayHistorico));
+                window.localStorage.getItem("Histórico")
                 clearInterval(intervalo);
             } else trocarJogador(); //função que troca a vez do jogador
         }
     });
 }
+
+/*let historico = {
+    vencedor: ,
+    tempo:
+};
+
+/*function saveScore () {
+    if (vitoria) {
+        window.localStorage.setItem("historico", JSON.stringify(historico);
+    }
+}*/
+
+
 
 //Decide aleatoriamente o jogador a fazer a primeira jogada
 let sortearJogador = function (nomeJogador1, nomeJogador2) {
