@@ -9,7 +9,6 @@ let jogador = '.'; //Define o jogador atual (. = jogador indefinido; X = jogador
 let vencedor = '.'; //Define se há um vencedor ou não (. = indefinido; X = jogador X, O = jogador O)
 
 let inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
-//localStorage.setItem("inicioContador", inicioContador); // Store it if I want to restart the timer on the next page
 let intervalo = setInterval(contadorTempo, 1000);
 let jogador1;
 let jogador2;
@@ -28,7 +27,7 @@ function verificarNomes () {
             intervalo = setInterval(contadorTempo, 1000);
             $('#form').css("display", "none");
             $('#container').css("display", "none");
-            sortearJogador(jogador1, jogador2); //Escolhe aleatoriamento o jogador inicial
+            sortearJogador(jogador1, jogador2);
         });
 }
 verificarNomes()
@@ -38,7 +37,7 @@ function charIsLetter(char) {
         if (typeof charElement !== 'string') {
             return false;
         } else if (charElement.toLowerCase() === charElement.toUpperCase()) {
-            return false
+            return false;
         }
     }
     return true;
