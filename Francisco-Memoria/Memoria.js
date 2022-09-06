@@ -109,6 +109,7 @@ function getMoreLogos(totalCards) {
 }
 
 function charIsLetter(char) {
+    if (char.length === 0) return false;
     for (const charElement of char) {
         if (typeof charElement !== 'string') {
             return false;
