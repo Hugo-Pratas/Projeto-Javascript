@@ -1,23 +1,26 @@
-let ready = $(document).ready(function(){
-    let player= 1;
+let ready = $(document).ready(function () {
+    let jogador1;
+    let jogador2;
+    let player = 1;
     let winner = 0;
     let numberOfLines = 7;
-    let colunas= 6;
-    let colors= {};
-    colors[-1]= "yellow";
-    colors[1]="red";
+    let colunas = 6;
+    let colors = {};
+    colors[-1] = "yellow";
+    colors[1] = "red";
     let count = 0;
     let inicioContador = Math.floor(Date.now() / 1000);
     let intervalo = setInterval(contadorTempo, 1000);
+    const idname = $("#name")
 
-    function verificarNomes () {
-        $('#submit').click(function aceitarNomes () {
+    function verificarNomes() {
+        $('#submit').click(function aceitarNomes() {
             jogador1 = document.getElementById("nomejogador1").value
             jogador2 = document.getElementById("nomejogador2").value
             if (!charIsLetter(Array.from(jogador1)) || !charIsLetter(Array.from(jogador2))) {
-                console.log("erro")
                 return
             }
+            idname.text("Jogador: " + jogador1)
             inicioContador = Math.floor(Date.now() / 1000);
             contadorTempo();
             clearInterval(intervalo);
@@ -26,19 +29,38 @@ let ready = $(document).ready(function(){
             $('#form').css("display", "none");
             $('#container').css("display", "none");
         });
+
     }
+
     verificarNomes()
+
 
     function charIsLetter(char) {
         for (const charElement of char) {
-            console.log(charElement)
+
             if (typeof charElement !== 'string') {
                 return false;
-            } return charElement.toLowerCase() !== charElement.toUpperCase();
+            } else if (charElement.toLowerCase() === charElement.toUpperCase()) {
+                return false
+            }
+
         }
+        return true;
     }
 
+    let trocarJogador = function () {
 
+
+        if (player === 1) {
+
+            idname.text("Jogador: " + jogador2)
+
+        } else if (player === -1) {
+
+            idname.text("Jogador: " + jogador1)
+
+        }
+    }
 
 
     function contadorTempo() {
@@ -49,7 +71,7 @@ let ready = $(document).ready(function(){
         m = addZeroContador(m); // add a leading zero if it's single digit
         s = addZeroContador(s); // add a leading zero if it's single digit
         document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
-
+        return [m,s];
     }
 
     function addZeroContador(i) {
@@ -60,83 +82,109 @@ let ready = $(document).ready(function(){
     }
 
 
-    $(".Espaço").each(function (){
-        $(this).attr("id",count);
-        $(this).attr("data-player",0);
+    $(".Espaço").each(function () {
+        $(this).attr("id", count);
+        $(this).attr("data-player", 0);
         count++;
 
-        $(this).click(function (){
-            if(isvalid($(this).attr("id"))){
-                const id = Number( $(this).attr("id"))
+        $(this).click(function () {
+            if (isvalid($(this).attr("id"))) {
+                const id = Number($(this).attr("id"))
                 const coluna = id % numberOfLines
                 const linha = parseInt(id / numberOfLines)
-                let lastElementAvailable ;
+                let lastElementAvailable;
 
-                for(let i = 0 ; i < 6; i++){
-                    const currentElement = $("#" + getId(i,coluna));
-                    if(currentElement.attr("data-player") === "0"){
+                for (let i = 0; i < 6; i++) {
+                    const currentElement = $("#" + getId(i, coluna));
+                    if (currentElement.attr("data-player") === "0") {
                         lastElementAvailable = currentElement;
                     }
                 }
 
-                $(lastElementAvailable).css("background-color",colors[player]);
-                $(lastElementAvailable).attr("data-player",player);
-                if(checkWin(player)){
-                    alert(colors[player]+ " Ganhou!")
+                $(lastElementAvailable).css("background-color", colors[player]);
+                $(lastElementAvailable).attr("data-player", player);
+
+                if (checkWin(player)) {
+
+                    let historicoTempo = contadorTempo().join(":");
+                    let listaHistorico = {
+                        vencedor: idname.html().split(" ").at(1),
+                        tempo: historicoTempo,
+                        jogo: "4EmLinha",
+                        date: new Date().toLocaleDateString(),
+                    }
+                    let arrayHistorico = [];
+                    let historico = window.localStorage.getItem("Histórico");
+                    if (historico !== null) {
+                        historico = JSON.parse(historico);
+                        arrayHistorico = historico
+                    }
+                    arrayHistorico.push(listaHistorico);
+                    window.localStorage.setItem("Histórico", JSON.stringify(arrayHistorico));
+                    clearInterval(intervalo);
+
+
+                    alert(colors[player] + " Ganhou!")
                     winner = player;
                 }
+                trocarJogador()
 
                 player *= -1;
             }
+
 
         });
 
     });
 
-    $("#restart").click(function (){
+    $("#restart").click(function () {
         inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
         contadorTempo();
         clearInterval(intervalo);
         intervalo = setInterval(contadorTempo, 1000);
         limparjogo();
     });
-    function getId(linha,coluna){
+
+    function getId(linha, coluna) {
         return linha * numberOfLines + coluna;
 
     }
-    function limparjogo(){
-        $(".Espaço").each(function(){
-            $(this).attr("data-player",0);
-            $(this).css("background-color","white");
 
-            winner= 0
+    function limparjogo() {
+        $(".Espaço").each(function () {
+            $(this).attr("data-player", 0);
+            $(this).css("background-color", "white");
+
+            winner = 0
         })
     }
-    function isvalid(n){
-        let id= parseInt(n);
-        if(winner !== 0){
+
+    function isvalid(n) {
+        let id = parseInt(n);
+        if (winner !== 0) {
             return false;
         }
-        if($("#"+id).attr("data-player")  === "0"){
-            if(id <= 42) {
+        if ($("#" + id).attr("data-player") === "0") {
+            if (id <= 42) {
                 return true;
             }
             return false;
         }
 
     }
-    function checkWin(p){
+
+    function checkWin(p) {
         //Checkar filas
         var filas = 0;
-        for(let i = 0; i < 42; i+=7){
-            for(let j = 0; j < 7; j++){
-                let espaco = $("#" +(i + j));
-                if(espaco.attr("data-player") == p) {
+        for (let i = 0; i < 42; i += 7) {
+            for (let j = 0; j < 7; j++) {
+                let espaco = $("#" + (i + j));
+                if (espaco.attr("data-player") == p) {
                     filas++;
-                }else{
+                } else {
                     filas = 0;
                 }
-                if(filas >= 4){
+                if (filas >= 4) {
                     clearInterval(intervalo)
                     return true;
                 }
@@ -145,15 +193,15 @@ let ready = $(document).ready(function(){
         }
         //checkar colunas
         filas = 0;
-        for(let i = 0; i < 7; i++){
-            for(let j = 0; j < 42; j+=7){
-                let espaco = $("#" +(i + j));
-                if(espaco.attr("data-player")== p) {
+        for (let i = 0; i < 7; i++) {
+            for (let j = 0; j < 42; j += 7) {
+                let espaco = $("#" + (i + j));
+                if (espaco.attr("data-player") == p) {
                     filas++;
-                }else{
+                } else {
                     filas = 0;
                 }
-                if(filas >= 4){
+                if (filas >= 4) {
                     clearInterval(intervalo)
                     return true;
                 }
@@ -162,22 +210,22 @@ let ready = $(document).ready(function(){
         }
         //check diagonais
         let topLeft = 0;
-        let topRight= topLeft + 3;
+        let topRight = topLeft + 3;
 
 
-        for(let i = 0; i < 3; i++){
-            for(let j = 0; j < 4; j++){
-                if($("#" + topLeft).attr("data-player") == p
-                    && $("#"+ (topLeft + 8)).attr("data-player") == p
-                    && $("#"+ (topLeft + 16)).attr("data-player") == p
-                    && $("#"+ (topLeft + 24)).attr("data-player") == p) {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 4; j++) {
+                if ($("#" + topLeft).attr("data-player") == p
+                    && $("#" + (topLeft + 8)).attr("data-player") == p
+                    && $("#" + (topLeft + 16)).attr("data-player") == p
+                    && $("#" + (topLeft + 24)).attr("data-player") == p) {
                     clearInterval(intervalo)
                     return true;
                 }
-                if($("#" + topRight).attr("data-player") == p
-                    && $("#"+ (topRight + 6)).attr("data-player") == p
-                    && $("#"+ (topRight + 12)).attr("data-player") == p
-                    && $("#"+ (topRight + 18)).attr("data-player") == p){
+                if ($("#" + topRight).attr("data-player") == p
+                    && $("#" + (topRight + 6)).attr("data-player") == p
+                    && $("#" + (topRight + 12)).attr("data-player") == p
+                    && $("#" + (topRight + 18)).attr("data-player") == p) {
                     clearInterval(intervalo)
                     return true;
                 }

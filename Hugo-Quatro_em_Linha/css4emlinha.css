@@ -25,7 +25,7 @@
     display: block;
     margin: 0 auto;
     margin-top: 1%;
-    background-color: gray;
+    background-color: #ff4545;
     border: 2px solid transparent;
     box-sizing: border-box;
     cursor:pointer;
@@ -37,7 +37,7 @@
 }
 
 #restart:hover{
-    background-color: darkgray;
+    background-color: #d70000;
 }
 span{
     color: yellow;
@@ -133,7 +133,7 @@ label {
     position: absolute;
     backdrop-filter: blur(15px);
     width: 100vw;
-    height: 100vh;
+    height: 150vh;
     top: 0;
 }
 
@@ -149,4 +149,14 @@ label {
 
 #submit:hover {
     background-color: forestgreen;
+}
+#name{
+    position: relative;
+    color: black;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    bottom: 2%;
+    top: 10%;
+    left: 75%;
+    right: 5%;
 }
