@@ -35,11 +35,13 @@ verificarNomes()
 
 function charIsLetter(char) {
     for (const charElement of char) {
-        console.log(charElement)
         if (typeof charElement !== 'string') {
             return false;
-        } return charElement.toLowerCase() !== charElement.toUpperCase();
+        } else if (charElement.toLowerCase() === charElement.toUpperCase()) {
+            return false
+        }
     }
+    return true;
 }
 
 function contadorTempo() {
@@ -51,20 +53,19 @@ function contadorTempo() {
     s = addZeroContador(s); // add a leading zero if it's single digit
     document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
     return [m, s]
-    //let t = setTimeout(contadorTempo, 500); // set a timeout to update the timer
 }
 
 function addZeroContador(i) {
     if (i < 10) {
         i = "0" + i
-    }  // add zero in front of numbers < 10
+    }
     return i;
 }
 
-//Área do jogo toda com fundo branco e texto branco para não se ver
+
 function botoesBrancos() {
     for (let i = 0; i < 9; i++) {
-        casas[i].style.color = '#FFFFFF'; //Torna o valor . invisível
+        casas[i].style.color = '#FFFFFF';
         casas[i].style.backgroundColor = '#FFFFFF';
     }
 }
@@ -84,6 +85,7 @@ for (let i = 0; i < 9; i++) {
                     vencedor: idJogador.innerText,
                     tempo: historicoTempo,
                     jogo: "Jogo Do Galo",
+                    data: new Date().toLocaleDateString(),
                 }
                 let arrayHistorico = [];
                 let historico = window.localStorage.getItem("Histórico");
@@ -94,7 +96,10 @@ for (let i = 0; i < 9; i++) {
                 arrayHistorico.push(listaHistorico);
                 window.localStorage.setItem("Histórico", JSON.stringify(arrayHistorico));
                 clearInterval(intervalo);
-            } else trocarJogador(); //função que troca a vez do jogador
+                setTimeout(() => {
+                    alert("O Vencedor é " + idJogador.innerText);
+                }, 200)
+            } else trocarJogador();
         }
     });
 }
@@ -111,24 +116,24 @@ let sortearJogador = function (nomeJogador1, nomeJogador2) {
         idJogador.style.color = '#ffffff';
     }
 }
-sortearJogador(); //Escolhe aleatoriamente o jogador inicial
+sortearJogador();
 
 botaoReiniciar.addEventListener('click', (function () {
     for (let i = 0; i < 9; i++) {
-        casas[i].value = '.'; //Limpa todas as casas
-        casas[i].style.color = '#FFFFFF'; //Torna o valor . invisível (branco)
-        casas[i].style.backgroundColor = '#FFFFFF'; //Torna o fundo branco
+        casas[i].value = '.';
+        casas[i].style.color = '#FFFFFF';
+        casas[i].style.backgroundColor = '#FFFFFF';
         casas[i].disabled = false;
     }
-    inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
+    inicioContador = Math.floor(Date.now() / 1000);
     contadorTempo();
     clearInterval(intervalo);
     intervalo = setInterval(contadorTempo, 1000);
     vencedor = '.'; //Reset ao vencedor
-    sortearJogador(jogador1, jogador2); //Escolhe aleatoriamente que jogador irá começar
+    sortearJogador(jogador1, jogador2);
 }));
 
-//Alterna a vez entre os jogadores X e Y (preenche dentro de cada botão A BRANCO, com a letra do jogador correspondente)
+
 let trocarJogador = function () {
     if (jogador === 'X') {
         jogador = 'O';
@@ -198,13 +203,13 @@ let vitoria = function () {
         casas[6].style.backgroundColor = '#0F0';
 
         return casas[2].value;
-        //Arranjar maneira de simplificar esta parte de baixo (por exemplo fazer function à parte e invocá-la aqui).
+
     } else if (casas[0].value !== '.' && casas[1].value !== '.' && casas[2].value !== '.' && casas[3].value !== '.' && casas[4].value !== '.'
         && casas[5].value !== '.' && casas[6].value !== '.' && casas[7].value !== '.' && casas[8].value !== '.') {
         for (let i = 0; i < 9; i++) {
-            casas[i].value = '.'; //Limpa todas as casas
-            casas[i].style.color = "#8E1600"; //Torna o valor . invisível
-            casas[i].style.backgroundColor = "#8E1600"; //Torna o fundo vermelho
+            casas[i].value = '.';
+            casas[i].style.color = "#8E1600";
+            casas[i].style.backgroundColor = "#8E1600";
             casas[i].disabled = true;
             clearInterval(intervalo);
         }

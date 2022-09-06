@@ -48,12 +48,16 @@ body {
 h2 {
     position: fixed;
     font-family: 'Helvetica Neue', sans-serif;
-    font-size: 3vw;
+    font-size: 2vw;
     bottom: 2%;
     top: 30%;
     left: 5%;
     right: 70%;
     color: white;
+}
+
+span {
+    font-size: 3vw;
 }
 
 p {
