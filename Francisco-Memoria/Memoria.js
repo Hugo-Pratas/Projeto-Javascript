@@ -13,8 +13,8 @@ popUP();
 function popUP() {
     $('#submit').click(function aceitarNomes() {
         gamerName = $("#nomejogador1").val();
-        rowNumber = $("#numeroDeLinhas").val();
-        columnNumber = $("#numeroDeColunas").val();
+        let rowNumber = $("#numeroDeLinhas").val();
+        let columnNumber = $("#numeroDeColunas").val();
         if (!charIsLetter(Array.from(gamerName))) {
             alert("O nome só pode conter Letras");
             return
