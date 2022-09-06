@@ -1,20 +1,7 @@
-let logos = [{
-    name: "dofus",
-}, {
-    name: "candy-crush",
-
-}, {
-    name: "fall-guys",
-
-}, {
-    name: "fortnite",
-
-}, {
-    name: "grand-theft-auto-v",
-
-}, {
-    name: "pokemon-go",
-}];
+let logos = [
+    "dofus", "candy-crush", "fall-guys", "fortnite", "grand-theft-auto-v", "pokemon-go"
+];
+console.log()
 let inicioContador = 0; //Get the starting time (right now) in seconds
 //localStorage.setItem("inicioContador", inicioContador); // Store it if I want to restart the timer on the next page
 let intervalo = 0;
@@ -23,23 +10,43 @@ let thisGameColumn = 3
 let thisGameRow = 4
 popUP();
 
+function popUP() {
+    $('#submit').click(function aceitarNomes() {
+        gamerName = $("#nomejogador1").val();
+        rowNumber = $("#numeroDeLinhas").val();
+        columnNumber = $("#numeroDeColunas").val();
+        if (!charIsLetter(Array.from(gamerName))) {
+            alert("O nome só pode conter Letras");
+            return
+        }
+        if (rowNumber > 10 || rowNumber < 3) {
+            alert("As linhas têm de ser entre 3 e 10");
+            return;
+        }
+        if (rowNumber * columnNumber / 2 % 2 !== 0) {
+            alert("A grelha que selecionou não é par, deve ser par para garantir cartas iguais");
+            return;
+        }
+        thisGameColumn = columnNumber;
+        thisGameRow = rowNumber;
+        addNametoMenu(gamerName);
+        inicioContador = Math.floor(Date.now() / 1000);
+        clearInterval(intervalo);
+        intervalo = setInterval(contadorTempo, 1000);
+        $('#form').css("display", "none");
+        $('#container').css("display", "none");
+        game();
+    });
+}
 
 function game() {
 //falta verificar se os números são validos, a row so pode ser entre 3 e 10 valores
 
     const totalCards = thisGameRow * thisGameColumn;
 
-    if (logos.length < totalCards / 2) { //popular a lista de logos se tiver logos insuficientes para o numero de cartas
-        let i = logos.length;
-        while (logos.length < totalCards / 2) {
-            i--;
-            logos.push(logos[i])
-            if (i === 0) {
-                i = logos.length;
-            }
-        }
+    if (logos.length < totalCards / 2) {
+        getMoreLogos(totalCards);//popular a lista de logos se tiver logos insuficientes para o numero de cartas
     }
-
     let thisGameLogos = shuffle(getDuplicatedLogos(logos, totalCards / 2));
     let thisGameMap = [];
     for (let i = 0; i < thisGameLogos.length; i++) {
@@ -47,16 +54,15 @@ function game() {
             name: thisGameLogos[i], id: i, won: false
         })
     }
-
     $("#game").append(populateGridHtml(thisGameColumn, thisGameRow, thisGameMap));
-
     contadorTempo();
+    cardOnClick(thisGameMap);
+}
 
+function cardOnClick(thisGameMap) {
     const card = $(".card");
     let previousCardId = -1; //start with value out of the array
     let isFlipping = false; //to prevent multiple flips at the same time
-
-
     card.on('click', function (e) {
         if (!isFlipping) {
             let currentCard = $(e.currentTarget);
@@ -75,15 +81,7 @@ function game() {
                 thisGameMap[previousCardId].won = true;
                 thisGameMap[cardId].won = true;
                 previousCardId = -1;
-                for (const thisGameMapElement of thisGameMap) { //check if we win
-                    if (!thisGameMapElement.won) { //return function if we not won
-                        return;
-                    }
-                }
-                clearInterval(intervalo);
-                setTimeout(() => { //prevent alert hapenning before final card turn
-                    alert("ganhou");
-                }, 200)
+                checkWin(thisGameMap);
             } else {
                 isFlipping = true;
                 setTimeout(function () {
@@ -99,27 +97,15 @@ function game() {
     });
 }
 
-function popUP() {
-    $('#submit').click(function aceitarNomes() {
-        gamerName = $("#nomejogador1").val();
-        rowNumber = $("#numeroDeLinhas").val();
-        if (!charIsLetter(Array.from(gamerName))) {
-            return
+function getMoreLogos(totalCards) {
+    let i = logos.length;
+    while (logos.length < totalCards / 2) {
+        i--;
+        logos.push(logos[i])
+        if (i === 0) {
+            i = logos.length;
         }
-
-        if (rowNumber > 10 || rowNumber < 3) {
-            return;
-        }
-        thisGameColumn = $("#numeroDeColunas").val();
-        thisGameRow = rowNumber
-        addNametoMenu(gamerName);
-        inicioContador = Math.floor(Date.now() / 1000);
-        clearInterval(intervalo);
-        intervalo = setInterval(contadorTempo, 1000);
-        $('#form').css("display", "none");
-        $('#container').css("display", "none");
-        game();
-    });
+    }
 }
 
 function charIsLetter(char) {
@@ -165,8 +151,8 @@ function getDuplicatedLogos(arr_logos, numberOfLogos) {
     }
 
     for (let i = 0; i < numberOfLogos; i++) {
-        arr_final.push(arr_logos[i].name)
-        arr_final.push(arr_logos[i].name)
+        arr_final.push(arr_logos[i])
+        arr_final.push(arr_logos[i])
     }
 
     return arr_final;
@@ -204,6 +190,7 @@ function contadorTempo() {
     m = addZeroContador(m); // add a leading zero if it's single digit
     s = addZeroContador(s); // add a leading zero if it's single digit
     document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
+    return [m, s];
     //let t = setTimeout(contadorTempo, 500); // set a timeout to update the timer
 }
 
@@ -225,5 +212,38 @@ function addNametoMenu(nameOfPlayer) {
     const name = $("#nome");
     name.append(" " + nameOfPlayer);
     return;
+}
+
+function checkWin(map) {
+    for (const MapElement of map) { //check if we win
+        if (!MapElement.won) { //return function if we not won
+            return;
+        }
+    }
+    clearInterval(intervalo);
+    sendToLocalStorage();
+    setTimeout(() => { //prevent alert hapenning before final card turn
+        alert("ganhou");
+    }, 200)
+}
+
+function sendToLocalStorage() {
+    let historicoTempo = contadorTempo().join(":");
+    let listaHistorico = {
+        vencedor: gamerName,
+        tempo: historicoTempo,
+        tentativas: Number($("#tentativas").html().split(" ").at(3)),
+        jogo: "Memória",
+        dimensão: thisGameColumn + "X" + thisGameRow,
+        data: new Date().toLocaleDateString()
+    };
+    let arrayHistorico = [];
+    let historico = window.localStorage.getItem("Histórico");
+    if (historico !== null) {
+        historico = JSON.parse(historico);
+        arrayHistorico = historico
+    }
+    arrayHistorico.push(listaHistorico);
+    window.localStorage.setItem("Histórico", JSON.stringify(arrayHistorico));
 }
 
