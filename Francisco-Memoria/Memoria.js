@@ -211,7 +211,6 @@ function addTriestoMenu() {
 function addNametoMenu(nameOfPlayer) {
     const name = $("#nome");
     name.append(" " + nameOfPlayer);
-    return;
 }
 
 function checkWin(map) {
@@ -234,7 +233,7 @@ function sendToLocalStorage() {
         tempo: historicoTempo,
         tentativas: Number($("#tentativas").html().split(" ").at(3)),
         jogo: "Memória",
-        dimensão: thisGameColumn + "X" + thisGameRow,
+        dimensao: thisGameColumn + "X" + thisGameRow,
         data: new Date().toLocaleDateString()
     };
     let arrayHistorico = [];
