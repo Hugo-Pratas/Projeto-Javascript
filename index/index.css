@@ -1,11 +1,40 @@
 body {
     background-image: url("indexbackground.jpeg");
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat;
     text-align: center;
 }
 
-#jogoGalo {
-    background-image: url("galoicon.png");
+#simbolos {
+    display: inline-flex;
+    margin-top: 35vh;
+    margin-right: 28vw;
+    gap: 50%;
+}
+
+img {
+    width: 8vw;
+    height: 8vw;
+}
+
+img:hover {
+    opacity: 0.5;
+    transform: translate(0, -15%);
+}
+
+.botão {
+    font-family: 'Helvetica Neue', sans-serif;
+    display: block;
+    margin-top: 11%;
+    margin-left: 43%;
+    border: blue;
+    box-sizing: border-box;
+    text-align:center;
+    position:relative;
+    border-radius: 2px;
+    font-size: 1.2vw;
+    width: 9vw;
+    height: 4vw;
+}
+
+.botão:active{
+    top:0.1em;
 }

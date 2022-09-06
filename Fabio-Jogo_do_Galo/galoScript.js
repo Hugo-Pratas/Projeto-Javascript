@@ -83,6 +83,7 @@ for (let i = 0; i < 9; i++) {
                 let listaHistorico = {
                     vencedor: idJogador.innerText,
                     tempo: historicoTempo,
+                    jogo: "Jogo Do Galo",
                 }
                 let arrayHistorico = [];
                 let historico = window.localStorage.getItem("Histórico");
@@ -92,25 +93,11 @@ for (let i = 0; i < 9; i++) {
                 }
                 arrayHistorico.push(listaHistorico);
                 window.localStorage.setItem("Histórico", JSON.stringify(arrayHistorico));
-                window.localStorage.getItem("Histórico")
                 clearInterval(intervalo);
             } else trocarJogador(); //função que troca a vez do jogador
         }
     });
 }
-
-/*let historico = {
-    vencedor: ,
-    tempo:
-};
-
-/*function saveScore () {
-    if (vitoria) {
-        window.localStorage.setItem("historico", JSON.stringify(historico);
-    }
-}*/
-
-
 
 //Decide aleatoriamente o jogador a fazer a primeira jogada
 let sortearJogador = function (nomeJogador1, nomeJogador2) {
@@ -219,6 +206,7 @@ let vitoria = function () {
             casas[i].style.color = "#8E1600"; //Torna o valor . invisível
             casas[i].style.backgroundColor = "#8E1600"; //Torna o fundo vermelho
             casas[i].disabled = true;
+            clearInterval(intervalo);
         }
     }
     return '.';

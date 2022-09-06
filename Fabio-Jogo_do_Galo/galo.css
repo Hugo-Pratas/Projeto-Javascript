@@ -1,5 +1,6 @@
 body {
     background-image: url("backgroundCode.jpeg");
+    background-size: cover;
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
@@ -62,17 +63,6 @@ p {
     font-size: 2vw;
     bottom: 2%;
     top: 0;
-    left: 93%;
-    right: 5%;
-}
-
-#scoreboard {
-    position: fixed;
-    color: white;
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 2vw;
-    bottom: 0%;
-    top: 50%;
     left: 93%;
     right: 5%;
 }
