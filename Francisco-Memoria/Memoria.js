@@ -245,7 +245,7 @@ function sendToLocalStorage() {
         tentativas: Number($("#tentativas").html().split(" ").at(3)),
         jogo: "Memória",
         dimensao: thisGameColumn + "X" + thisGameRow,
-        data: new Date().toLocaleDateString()
+        data:  new Date().toLocaleString()
     };
     let arrayHistorico = [];
     let historico = window.localStorage.getItem("Histórico");
