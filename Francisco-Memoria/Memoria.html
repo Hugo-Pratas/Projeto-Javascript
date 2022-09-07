@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="Memoria.css">
+    <meta charset="UTF-8">
+    <title>Quatro em Linha</title>
+</head>
+<body>
+
+<div id="container"></div>
+<div id="form">
+    <h3>Let the games begin..</h3>
+    <label for="nomejogador1">Nome do Jogador: </label>
+    <input type="text" placeholder="Nome" id="nomejogador1">
+    <label>Escolha o tamanho do Jogo: </label>
+    <input type="number" placeholder="Nº de Colunas" id="numeroDeColunas">
+    <input type="number" placeholder="Nº de Linhas" id="numeroDeLinhas" min="3" max="10">
+    <button id="submit">Começar</button>
+</div>
+
+<div id="game"></div>
+<div id="menu">
+    <div>
+        <h1>
+            Jogo da Memória
+        </h1>
+        <h2 id="relogio"></h2>
+        <h2 id="nome">Jogador: </h2>
+        <h2 id="tentativas">Nº de tentativas: 0</h2>
+        <div id="logo"></div>
+
+    </div>
+</div>
+<script src="Memoria.js"></script>
+</body>
+</html>
