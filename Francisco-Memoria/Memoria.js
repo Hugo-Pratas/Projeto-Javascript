@@ -177,13 +177,6 @@ function shuffle(array) { //https://stackoverflow.com/questions/2450954/how-to-r
     return array;
 }
 
-function verTempo(i) {
-    if (i < 10) {
-        i = "0" + i
-    }  // add zero in front of numbers < 10
-    return i;
-}
-
 function contadorTempo() {
     let agora = Math.floor(Date.now() / 1000); // get the time now
     let diferenca = agora - inicioContador; // diff in seconds between now and start
