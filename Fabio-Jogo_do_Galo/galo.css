@@ -50,7 +50,7 @@ h2 {
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 2vw;
     bottom: 2%;
-    top: 30%;
+    top: 20%;
     left: 5%;
     right: 70%;
     color: white;
@@ -195,22 +195,63 @@ label {
     right: 20%;
 }
 
+#jogadores {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    margin-left: 80%;
+    margin-right: 70%;
+}
+
 #jogador1 {
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
-    font-size: 2vw;
-    bottom: 0;
-    top: 30%;
-    left: 84%;
-    right: 70%;
+    font-size: 3vw;
+    /*bottom: 0;
+    top: 18%;
+    left: 80%;
+    right: 70%;*/
 }
 
 #jogador2 {
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
+    font-size: 3vw;
+    /*bottom: 0;
+    top: 31%;
+    left: 80%;
+    right: 70%;*/
+}
+
+#scoreX {
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
     font-size: 2vw;
     bottom: 0;
-    top: 30%;
-    left: 91%;
+    top: 40%;
+    left: 84%;
     right: 70%;
+}
+
+#scoreO {
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    bottom: 0;
+    top: 27%;
+    left: 84%;
+    right: 70%;
+}
+
+h4 {
+    position: fixed;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    bottom: 2%;
+    top: 35%;
+    left: 5%;
+    right: 70%;
+    color: white;
 }
