@@ -1,3 +1,11 @@
+body {
+    background-image: url("backgroundCode.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+}
 .grid{
     display: grid;
     grid-template-columns: repeat(7, 10vw);
@@ -6,7 +14,8 @@
     height: 60vw;
     margin: 5% auto;
     justify-content: center;
-    background-color: black;
+    background-color: saddlebrown;
+    border-radius: 25px;
 }
 .grid{
     margin-top: 5%;
@@ -17,8 +26,22 @@
     border-radius: 50%;
 
 }
+#my-canvas {
+    border: 1px solid gray;
+}
+
 .Espaço:hover{
     background-color: green;
+}
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    left: 6px;
 }
 
 #restart{
@@ -50,14 +73,12 @@ h1{
 }
 
 p {
-    position: fixed;
-    color: black;
+    position: center;
+    color: white;
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 2vw;
-    bottom: 2%;
-    top: 0;
-    left: 93%;
-    right: 5%;
+    top: 8%;
+
 }
 h3 {
     font-size: 25px;
@@ -151,12 +172,11 @@ label {
     background-color: forestgreen;
 }
 #name{
-    position: relative;
-    color: black;
+    position: center;
+    color: white;
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 2vw;
-    bottom: 2%;
     top: 10%;
-    left: 75%;
-    right: 5%;
+    display:inline-block;
+
 }

@@ -4,14 +4,23 @@ let ready = $(document).ready(function () {
     let player = 1;
     let winner = 0;
     let numberOfLines = 7;
-    let colunas = 6;
     let colors = {};
     colors[-1] = "yellow";
     colors[1] = "red";
     let count = 0;
+    let dots= [$(".dot")]
     let inicioContador = Math.floor(Date.now() / 1000);
     let intervalo = setInterval(contadorTempo, 1000);
     const idname = $("#name")
+
+
+
+    function fillCircle(color) {
+        $("#dot").css("background-color",color)
+
+
+    }
+
 
     function verificarNomes() {
         $('#submit').click(function aceitarNomes() {
@@ -20,6 +29,7 @@ let ready = $(document).ready(function () {
             if (!charIsLetter(Array.from(jogador1)) || !charIsLetter(Array.from(jogador2))) {
                 return
             }
+            fillCircle("red")
             idname.text("Jogador: " + jogador1)
             inicioContador = Math.floor(Date.now() / 1000);
             contadorTempo();
@@ -53,11 +63,13 @@ let ready = $(document).ready(function () {
 
         if (player === 1) {
 
-            idname.text("Jogador: " + jogador2)
+            idname.text("Jogador: " + jogador2  )
+            fillCircle("yellow")
 
         } else if (player === -1) {
 
-            idname.text("Jogador: " + jogador1)
+            idname.text("Jogador: " + jogador1  )
+            fillCircle("red")
 
         }
     }
@@ -111,7 +123,7 @@ let ready = $(document).ready(function () {
                         vencedor: idname.html().split(" ").at(1),
                         tempo: historicoTempo,
                         jogo: "4EmLinha",
-                        date: new Date().toLocaleDateString(),
+                        data: new Date().toLocaleDateString(),
                     }
                     let arrayHistorico = [];
                     let historico = window.localStorage.getItem("Histórico");
@@ -122,20 +134,25 @@ let ready = $(document).ready(function () {
                     arrayHistorico.push(listaHistorico);
                     window.localStorage.setItem("Histórico", JSON.stringify(arrayHistorico));
                     clearInterval(intervalo);
-
-
-                    alert(colors[player] + " Ganhou!")
                     winner = player;
+                    setTimeout(() => {alert(colors[player] + " Ganhou!")
+                    }, 1000)
+                   return
+
+
                 }
                 trocarJogador()
 
                 player *= -1;
+
             }
+
 
 
         });
 
     });
+
 
     $("#restart").click(function () {
         inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
@@ -143,6 +160,8 @@ let ready = $(document).ready(function () {
         clearInterval(intervalo);
         intervalo = setInterval(contadorTempo, 1000);
         limparjogo();
+        trocarJogador()
+        player *= -1;
     });
 
     function getId(linha, coluna) {
@@ -154,6 +173,7 @@ let ready = $(document).ready(function () {
         $(".Espaço").each(function () {
             $(this).attr("data-player", 0);
             $(this).css("background-color", "white");
+            $(this).css("background-color", "");
 
             winner = 0
         })
