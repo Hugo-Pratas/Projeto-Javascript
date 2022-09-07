@@ -31,7 +31,21 @@ body {
     box-sizing: border-box;
 }
 
+#indicadorJogador {
+    position: fixed;
+    top: 18vh;
+    right: 80vw;
+    float: right;
+}
+
 #jogador {
+    position: fixed;
+    top: 27vh;
+    right: 81vw;
+    float: right;
+    align-content: center;
+    align-items: center;
+    text-align: center;
     display: inline;
 }
 
@@ -46,11 +60,10 @@ body {
 }
 
 h2 {
-    position: fixed;
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 2vw;
     bottom: 2%;
-    top: 30%;
+    top: 20%;
     left: 5%;
     right: 70%;
     color: white;
@@ -195,22 +208,73 @@ label {
     right: 20%;
 }
 
+#jogadores {
+    position: fixed;
+    top: 16vh;
+    left: 80vw;
+    float: right;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+#jogadoresEronda {
+    position: fixed;
+    top: 16vh;
+    right: 80vw;
+    float: left;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 #jogador1 {
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
-    font-size: 2vw;
-    bottom: 0;
-    top: 30%;
-    left: 84%;
-    right: 70%;
+    font-size: 3vw;
+    /*bottom: 0;
+    top: 18%;
+    left: 80%;
+    right: 70%;*/
 }
 
 #jogador2 {
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
+    font-size: 3vw;
+    /*bottom: 0;
+    top: 31%;
+    left: 80%;
+    right: 70%;*/
+}
+
+#scoreX {
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
     font-size: 2vw;
-    bottom: 0;
-    top: 30%;
-    left: 91%;
-    right: 70%;
+    /*bottom: 0;
+    top: 40%;
+    left: 84%;
+    right: 70%;*/
+}
+
+#scoreO {
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+/*bottom: 0;
+top: 27%;
+left: 84%;
+right: 70%;*/
+}
+
+h4 {
+position: fixed;
+font-family: 'Helvetica Neue', sans-serif;
+font-size: 2vw;
+    top: 30vh;
+    right: 84vw;
+    float: right;
+color: white;
 }
