@@ -1,17 +1,16 @@
-//Obtendo os elementos do DOM com que vamos interagir
-const casas = document.getElementsByTagName('input'); //lista de casas do tabuleiro do jogo
-const botaoReiniciar = document.getElementById('reiniciar'); //botão de reiniciar
-const idJogador = document.getElementById('jogador'); //id do jogador que tem a vez
-const idScore1 = document.getElementById('jogador1'); //id do score jogador 1
-const idScore2 = document.getElementById('jogador2'); //id do score jogador 2
+//Obtendo os elementos do HTML com que vamos interagir.
+const casas = document.getElementsByTagName('input');
+const botaoReiniciar = document.getElementById('reiniciar');
+const idJogador = document.getElementById('jogador');
+const idScore1 = document.getElementById('jogador1');
+const idScore2 = document.getElementById('jogador2');
 const resultadoX = document.getElementById('scoreX');
 const resultadoO = document.getElementById('scoreO');
-//Definindo variáveis do estado do jogo
+//Variáveis do estado do jogo
+let jogador = '.';
+let vencedor = '.';
 
-let jogador = '.'; //Define o jogador atual (. = jogador indefinido; X = jogador X, O = jogador O)
-let vencedor = '.'; //Define se há um vencedor ou não (. = indefinido; X = jogador X, O = jogador O)
-
-let inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
+let inicioContador = Math.floor(Date.now() / 1000);
 let intervalo = setInterval(contadorTempo, 1000);
 let jogador1;
 let jogador2;
@@ -105,11 +104,11 @@ function novaRonda () {
         casas[i].style.backgroundColor = '#FFFFFF';
         casas[i].disabled = false;
     }
-    vencedor = '.'; //Reset ao vencedor
+    vencedor = '.';
     sortearJogador(jogador1, jogador2);
 }
 
-//Determina tudo o que faz o botão de reiniciar jogo (reset de cor, .value(.,X,O), pára o timer, sorteia novo jogador random)
+//Determina tudo o que faz o botão de reiniciar jogo.
 botaoReiniciar.addEventListener('click', function() {
     if (vencedor !== ".") {
         rondaN++
@@ -267,7 +266,7 @@ function sendToLocalStorage() {
     window.localStorage.setItem("Histórico", JSON.stringify(arrayHistorico));
 }
 
-//Resultados de cada ronda
+//Resultados de cada ronda.
 function contadorJogador(vencedor) {
     nomeJogador[vencedor];
     if (vencedor === "X") {
