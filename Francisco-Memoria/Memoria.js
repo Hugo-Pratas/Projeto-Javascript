@@ -30,9 +30,6 @@ function popUP() {
         thisGameColumn = columnNumber;
         thisGameRow = rowNumber;
         addNametoMenu(gamerName);
-        inicioContador = Math.floor(Date.now() / 1000);
-        clearInterval(intervalo);
-        intervalo = setInterval(contadorTempo, 1000);
         $('#form').css("display", "none");
         $('#container').css("display", "none");
         game();
@@ -41,7 +38,9 @@ function popUP() {
 
 function game() {
 //falta verificar se os números são validos, a row so pode ser entre 3 e 10 valores
-
+    inicioContador = Math.floor(Date.now() / 1000);
+    clearInterval(intervalo);
+    intervalo = setInterval(contadorTempo, 1000);
     const totalCards = thisGameRow * thisGameColumn;
 
     if (logos.length < totalCards / 2) {
@@ -89,7 +88,7 @@ function cardOnClick(thisGameMap) {
                     currentCard.removeClass('selected');
                     previousCardId = -1;
                     isFlipping = false;
-                }, 600)
+                }, 400)
             }
         }
 
@@ -205,7 +204,7 @@ function addZeroContador(i) {
 function addTriestoMenu() {
     const tentativas = $("#tentativas");
     const tentativas_text = tentativas.html();
-    currentTry = Number(tentativas_text.split(" ").at(3));
+    let currentTry = Number(tentativas_text.split(" ").at(3));
     tentativas.text(tentativas_text.replace(currentTry, currentTry + 1))
 }
 
@@ -223,7 +222,16 @@ function checkWin(map) {
     clearInterval(intervalo);
     sendToLocalStorage();
     setTimeout(() => { //prevent alert hapenning before final card turn
-        alert("ganhou");
+        if (confirm("Parabens, ganhou! Deseja voltar ao menu?") == true) {
+            window.location = "../index/index.html";
+        } else {
+            const tentativas = $("#tentativas");
+            const tentativas_text = tentativas.html();
+            let currentTry = Number(tentativas_text.split(" ").at(3));
+            tentativas.text(tentativas_text.replace(currentTry, 0))
+            $("#game").empty();
+            game();
+        };
     }, 200)
 }
 
