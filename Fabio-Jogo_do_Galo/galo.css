@@ -184,3 +184,33 @@ label {
 #submit:hover {
     background-color: forestgreen;
 }
+
+#doispontos {
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    bottom: 0;
+    top: 30%;
+    left: 90%;
+    right: 20%;
+}
+
+#jogador1 {
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    bottom: 0;
+    top: 30%;
+    left: 84%;
+    right: 70%;
+}
+
+#jogador2 {
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    bottom: 0;
+    top: 30%;
+    left: 91%;
+    right: 70%;
+}

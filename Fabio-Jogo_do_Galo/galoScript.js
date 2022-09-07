@@ -2,7 +2,9 @@
 const casas = document.getElementsByTagName('input'); //lista de casas do tabuleiro do jogo
 const botaoReiniciar = document.getElementById('reiniciar'); //botão de reiniciar
 const idJogador = document.getElementById('jogador'); //id do jogador que tem a vez
-
+const idScore1 = document.getElementById('jogador1'); //id do score jogador 1
+const idScore2 = document.getElementById('jogador2'); //id do score jogador 2
+const resultado = document.getElementById('score');
 //Definindo variáveis do estado do jogo
 
 let jogador = '.'; //Define o jogador atual (. = jogador indefinido; X = jogador X, O = jogador O)
@@ -12,6 +14,7 @@ let inicioContador = Math.floor(Date.now() / 1000); //Get the starting time (rig
 let intervalo = setInterval(contadorTempo, 1000);
 let jogador1;
 let jogador2;
+let score = 0;
 
 
 function verificarNomes () {
@@ -28,56 +31,20 @@ function verificarNomes () {
             $('#form').css("display", "none");
             $('#container').css("display", "none");
             sortearJogador(jogador1, jogador2);
+            idScore1.innerText = jogador1
+            idScore2.innerText = jogador2
         });
 }
-verificarNomes()
-
-function charIsLetter(char) {
-    for (const charElement of char) {
-        if (typeof charElement !== 'string') {
-            return false;
-        } else if (charElement.toLowerCase() === charElement.toUpperCase()) {
-            return false;
-        }
-    }
-    return true;
-}
-
-function contadorTempo() {
-    let agora = Math.floor(Date.now() / 1000); // get the time now
-    let diferenca = agora - inicioContador; // diff in seconds between now and start
-    let m = Math.floor(diferenca / 60); // get minutes value (quotient of diff)
-    let s = Math.floor(diferenca % 60); // get seconds value (remainder of diff)
-    m = addZeroContador(m); // add a leading zero if it's single digit
-    s = addZeroContador(s); // add a leading zero if it's single digit
-    document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
-    return [m, s]
-}
-
-function addZeroContador(i) {
-    if (i < 10) {
-        i = "0" + i
-    }
-    return i;
-}
-
-
-function botoesBrancos() {
-    for (let i = 0; i < 9; i++) {
-        casas[i].style.color = '#FFFFFF';
-        casas[i].style.backgroundColor = '#FFFFFF';
-    }
-}
+verificarNomes();
 botoesBrancos();
 
 //Define a resposta ao click aos botoes do jogo
 for (let i = 0; i < 9; i++) {
     casas[i].addEventListener('click', (event) => {
-        //se a casa estiver vazia e ninguém tiver vencido a partida
         if ((event.target.value === '.') && (vencedor === '.')) {
-            event.target.value = jogador; //preenche a casa com X ou O
-            event.target.style.color = '#bc5e00'; //torna o valor da casa visível (X ou O)
-            vencedor = vitoria(); //Executa a função vitoria()
+            event.target.value = jogador;
+            event.target.style.color = '#bc5e00';
+            vencedor = vitoria();
             if (vencedor !== ".") {
                 let historicoTempo = contadorTempo().join(":");
                 let listaHistorico = {
@@ -103,7 +70,20 @@ for (let i = 0; i < 9; i++) {
     });
 }
 
-//Decide aleatoriamente o jogador a fazer a primeira jogada
+
+/* for (let i = 0; i <= 4; i++) {
+        if (jogador === 'X') {
+            let ronda = 0
+            ronda = ronda++
+            scoreX = scoreX++
+          } else if (jogador === 'O') {
+            let ronda = 0
+            ronda = ronda++
+            scoreO = scoreO++
+}
+console.log(jogador);*/
+
+//Sorteia a primeira jogada de cada jogo.
 let sortearJogador = function (nomeJogador1, nomeJogador2) {
     if (Math.floor(Math.random() * 2) === 0) {
         jogador = "O";
@@ -115,8 +95,8 @@ let sortearJogador = function (nomeJogador1, nomeJogador2) {
         idJogador.style.color = '#ffffff';
     }
 }
-sortearJogador();
 
+//Determina tudo o que faz o botão de reiniciar jogo (reset de cor, .value(.,X,O), pára o timer, sorteia novo jogador random)
 botaoReiniciar.addEventListener('click', (function () {
     for (let i = 0; i < 9; i++) {
         casas[i].value = '.';
@@ -146,6 +126,7 @@ let trocarJogador = function () {
     }
 }
 
+//Function que encontra vitória ou empate mediante os .value de cada botão das casas.
 let vitoria = function () {
     if ((casas[0].value === casas[1].value) && (casas[1].value === casas[2].value) && casas[0].value !== '.') {
         casas[0].style.backgroundColor = '#0F0';
@@ -215,3 +196,46 @@ let vitoria = function () {
     }
     return '.';
 }
+
+//Confirmar se o user coloca um nome de jogador válido.
+function charIsLetter(char) {
+    if (char.length === 0) {
+        return false;
+    }
+    for (const charElement of char) {
+        if (typeof charElement !== 'string') {
+            return false;
+        } else if (charElement.toLowerCase() === charElement.toUpperCase()) {
+            return false
+        }
+    }
+    return true;
+}
+
+//Força os botões das casas a permanecerem brancos, assim que se inicia e reinicia um jogo.
+function botoesBrancos() {
+    for (let i = 0; i < 9; i++) {
+        casas[i].style.color = '#FFFFFF';
+        casas[i].style.backgroundColor = '#FFFFFF';
+    }
+}
+
+//Function que controla o timer.
+function contadorTempo() {
+    let agora = Math.floor(Date.now() / 1000); // get the time now
+    let diferenca = agora - inicioContador; // diff in seconds between now and start
+    let m = Math.floor(diferenca / 60); // get minutes value (quotient of diff)
+    let s = Math.floor(diferenca % 60); // get seconds value (remainder of diff)
+    m = addZeroContador(m); // add a leading zero if it's single digit
+    s = addZeroContador(s); // add a leading zero if it's single digit
+    document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
+    return [m, s]
+}
+
+function addZeroContador(i) {
+    if (i < 10) {
+        i = "0" + i
+    }
+    return i;
+}
+
