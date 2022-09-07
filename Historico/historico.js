@@ -18,7 +18,7 @@ function getGaloGames(){
     tableBody.empty();
 
     let arr_jogosGalo = arr_historico.filter(function (arrHistoricoElement) {
-        return arrHistoricoElement.jogo === "JogodoGalo";
+        return arrHistoricoElement.jogo === "Jogo do Galo";
     })
     tableBody.append(`
         <thead>
