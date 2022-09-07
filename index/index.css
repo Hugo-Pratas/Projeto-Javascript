@@ -1,0 +1,101 @@
+body {
+    background-image: url("indexbackground.jpeg");
+    text-align: center;
+    background-position: center center;
+    background-size: cover;
+}
+
+#simbolos {
+    display: inline-flex;
+    margin-top: 35vh;
+    margin-right: 28vw;
+    gap: 50%;
+}
+
+img {
+    width: 8vw;
+    height: 8vw;
+}
+
+img:hover {
+    opacity: 0.5;
+    transform: translate(0, -15%);
+}
+
+.botão {
+    font-family: 'Helvetica Neue', sans-serif;
+    display: block;
+    margin-top: 11%;
+    margin-left: 43%;
+    border: blue;
+    box-sizing: border-box;
+    text-align:center;
+    position:relative;
+    border-radius: 10px;
+    font-size: 1.2vw;
+    width: 9vw;
+    height: 4vw;
+}
+
+.botão:active{
+    top:0.1em;
+}
+
+.botão:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.botão:active {
+    color: #000
+}
+
+.botão:active:after {
+    background: transparent;
+}
+
+.botão:hover:before {
+    opacity: 1;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+#galo {
+    font-size: 1.5vw;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    margin-top: 1%;
+    margin-left: -44.6%;
+}
+
+#quatro {
+    font-size: 1.5vw;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    margin-top: -3.4%;
+    margin-left: 37%;
+}
+
+#memoria {
+    font-size: 1.5vw;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    margin-top: -3.3%;
+    margin-left: -4.5%;
+}
