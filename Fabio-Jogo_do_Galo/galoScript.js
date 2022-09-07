@@ -58,7 +58,7 @@ for (let i = 0; i < 9; i++) {
                 sendToLocalStorage();
                 clearInterval(intervalo);
                 setTimeout(() => {
-                    if (confirm("O Vencedor é " + idJogador.innerText)) {
+                    if (confirm("O Vencedor é " + idJogador.innerText + ".")) {
                         resetCounters();
                     }
                 }, 200)
@@ -251,7 +251,7 @@ function sendToLocalStorage() {
         vencedor: idJogador.innerText,
         tempo: historicoTempo,
         jogo: "Jogo Do Galo",
-        data: new Date().toLocaleDateString(),
+        data: new Date().toLocaleString(),
         rondas: rondaN,
         resultados: scoreX + " : " + scoreO,
     }
