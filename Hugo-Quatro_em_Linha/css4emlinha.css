@@ -1,0 +1,182 @@
+body {
+    background-image: url("backgroundCode.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(7, 10vw);
+    grid-template-rows: repeat(6, 10vw);
+    width: 70vw;
+    height: 60vw;
+    margin: 5% auto;
+    justify-content: center;
+    background-color: saddlebrown;
+    border-radius: 25px;
+}
+.grid{
+    margin-top: 5%;
+}
+.Espaço{
+    border: 2px solid;
+    background-color: white;
+    border-radius: 50%;
+
+}
+#my-canvas {
+    border: 1px solid gray;
+}
+
+.Espaço:hover{
+    background-color: green;
+}
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    left: 6px;
+}
+
+#restart{
+    display: block;
+    margin: 0 auto;
+    margin-top: 1%;
+    background-color: #ff4545;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    cursor:pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 15px 25px;
+    text-align: center;
+}
+
+#restart:hover{
+    background-color: #d70000;
+}
+span{
+    color: yellow;
+}
+
+h1{
+    font-size: 5vw;
+    text-align: center;
+    color: red;
+}
+
+p {
+    position: center;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    top: 8%;
+
+}
+h3 {
+    font-size: 25px;
+}
+
+h5 {
+    padding-top: 1%;
+    padding-bottom: 5%;
+    margin-bottom: auto;
+}
+
+#form{
+    height: auto;
+    min-height: 20vw;
+    width: 25vw;
+    background-color: rgba(40,45,53,1);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 2px 2px 2px 2px;
+}
+
+#form *{
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    alignment: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+label {
+    display: flex;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    font-weight: 500;
+}
+#nomejogador1 {
+    display: flex;
+    height: 70%;
+    width: 80%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 2vh auto auto auto;
+}
+::placeholder{
+    color: grey;
+}
+#nomejogador2 {
+    display: flex;
+    width: 80%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 2vh auto 15vh auto;
+}
+
+#container {
+    position: absolute;
+    backdrop-filter: blur(15px);
+    width: 100vw;
+    height: 150vh;
+    top: 0;
+}
+
+#submit {
+    background-color: grey;
+    color: #eee;
+    border: none;
+    margin: auto auto 30%;
+    width: 10vw;
+    height: 5vh;
+    font-size: 1.5vw;
+}
+
+#submit:hover {
+    background-color: forestgreen;
+}
+#name{
+    position: center;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2vw;
+    top: 10%;
+    display:inline-block;
+
+}
