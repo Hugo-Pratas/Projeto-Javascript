@@ -6,7 +6,6 @@ let jogoGaloButton = $("#JogoGalo");
 let quatroLinhaButton = $("#QuatroLinha");
 let jogoMemoriaButton = $("#JogoMemoria");
 
-getAllGames();
 
 todosJogosButton.on("click", getAllGames);
 jogoGaloButton.on("click", getGaloGames);
@@ -25,6 +24,8 @@ function getGaloGames(){
             <tr>
                 <th scope="col">Jogo</th>
                 <th scope="col">Nome do Vencedor</th>
+                <th scope="col">Rondas</th>
+                <th scope="col">Resultados</th>
                 <th scope="col">Tempo</th>
                 <th scope="col">Data</th>
             </tr>
@@ -37,6 +38,8 @@ function getGaloGames(){
             '<tr>' +
             `<th scope="row">${jogoGalo.jogo}</th>` +
             `<td>${jogoGalo.vencedor}</td>` +
+            `<td>${jogoGalo.rondas}</td>` +
+            `<td>${jogoGalo.resultados}</td>` +
             `<td>${jogoGalo.tempo}</td>` +
             ` <td>${jogoGalo.data}</td>` +
             '</tr>'
