@@ -1,5 +1,7 @@
 let logos = [
-    "dofus", "candy-crush", "fall-guys", "fortnite", "grand-theft-auto-v", "pokemon-go"
+    "dofus", "candy-crush", "fall-guys", "fortnite", "grand-theft-auto-v", "pokemon-go","visual-game-boy","warframe","world-of-warcraft",
+    "vale-de-stardew","spore","skyrim","liga-de-foguetes","ps4","osu","nintendo-switch-logo","minecraft-dungeons","league-of-legends","hollow-knight","hearthstone",
+    "genshin-impact","gta-5","final-fantasy-xiv","dota","doom-logo","contra-ataque","call-of-duty-black-ops-4","among-us"
 ];
 console.log()
 let inicioContador = 0; //Get the starting time (right now) in seconds
@@ -88,7 +90,7 @@ function cardOnClick(thisGameMap) {
                     currentCard.removeClass('selected');
                     previousCardId = -1;
                     isFlipping = false;
-                }, 400)
+                }, 600)
             }
         }
 
@@ -231,7 +233,7 @@ function checkWin(map) {
             tentativas.text(tentativas_text.replace(currentTry, 0))
             $("#game").empty();
             game();
-        };
+        }
     }, 200)
 }
 

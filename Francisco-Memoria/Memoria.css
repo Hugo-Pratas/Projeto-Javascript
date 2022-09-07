@@ -248,6 +248,126 @@
     background-size: cover;
 }
 
+.visual-game-boy{
+    height: 100%;
+    background-image: url("img/icons8-visual-game-boy.svg");
+    background-size: cover;
+}
+
+.warframe{
+    height: 100%;
+    background-image: url("img/icons8-warframe.svg");
+    background-size: cover;
+}
+
+.world-of-warcraft{
+    height: 100%;
+    background-image: url("img/icons8-world-of-warcraft.svg");
+    background-size: cover;
+}
+
+.vale-de-stardew{
+    height: 100%;
+    background-image: url("img/icons8-vale-de-stardew.svg");
+    background-size: cover;
+}
+
+.spore{
+    height: 100%;
+    background-image: url("img/icons8-spore.svg");
+    background-size: cover;
+}
+.skyrim{
+    height: 100%;
+    background-image: url("img/icons8-skyrim.svg");
+    background-size: cover;
+}
+.liga-de-foguetes{
+    height: 100%;
+    background-image: url("img/icons8-liga-de-foguetes.svg");
+    background-size: cover;
+}
+.ps4{
+    height: 100%;
+    background-image: url("img/icons8-ps4.svg");
+    background-size: cover;
+}
+.osu{
+    height: 100%;
+    background-image: url("img/icons8-osu.svg");
+    background-size: cover;
+}
+.nintendo-switch-logo{
+    height: 100%;
+    background-image: url("img/icons8-nintendo-switch-logo.svg");
+    background-size: cover;
+}
+.minecraft-dungeons{
+    height: 100%;
+    background-image: url("img/icons8-minecraft-dungeons.svg");
+    background-size: cover;
+}
+.league-of-legends{
+    height: 100%;
+    background-image: url("img/icons8-league-of-legends.svg");
+    background-size: cover;
+}
+.hollow-knight{
+    height: 100%;
+    background-image: url("img/icons8-hollow-knight.svg");
+    background-size: cover;
+}
+.hearthstone{
+    height: 100%;
+    background-image: url("img/icons8-hearthstone.svg");
+    background-size: cover;
+}
+
+.genshin-impact{
+    height: 100%;
+    background-image: url("img/icons8-genshin-impact.svg");
+    background-size: cover;
+}
+
+.gta-5{
+    height: 100%;
+    background-image: url("img/icons8-gta-5.svg");
+    background-size: cover;
+}
+
+.final-fantasy-xiv{
+    height: 100%;
+    background-image: url("img/icons8-final-fantasy-xiv.svg");
+    background-size: cover;
+}
+
+.dota{
+    height: 100%;
+    background-image: url("img/icons8-dota.svg");
+    background-size: cover;
+}
+
+.doom-logo{
+    height: 100%;
+    background-image: url("img/icons8-doom-logo.svg");
+    background-size: cover;
+}
+.contra-ataque{
+    height: 100%;
+    background-image: url("img/icons8-contra-ataque.svg");
+    background-size: cover;
+}
+.call-of-duty-black-ops-4{
+    height: 100%;
+    background-image: url("img/icons8-call-of-duty-black-ops-4.svg");
+    background-size: cover;
+}
+.among-us{
+    height: 100%;
+    background-image: url("img/icons8-among-us.svg");
+    background-size: cover;
+}
+
 body{
     display: flex;
     align-items: center;
