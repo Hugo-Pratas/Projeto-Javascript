@@ -110,7 +110,7 @@ function getMemoriaGames() {
             `<th scope="row">${jogoMemoria.jogo}</th>` +
             `<td>${jogoMemoria.vencedor}</td>` +
             `<td>${jogoMemoria.tentativas}</td>` +
-            `<td>${jogoMemoria.dimensão}</td>` +
+            `<td>${jogoMemoria.dimensao}</td>` +
             `<td>${jogoMemoria.tempo}</td>` +
             ` <td>${jogoMemoria.data}</td>` +
             '</tr>'
