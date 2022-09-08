@@ -123,7 +123,7 @@ let ready = $(document).ready(function () {
                         vencedor: idname.html().split(" ").at(1),
                         tempo: historicoTempo,
                         jogo: "4EmLinha",
-                        data: new Date().toLocaleDateString(),
+                        data: new Date().toLocaleString(),
                     }
                     let arrayHistorico = [];
                     let historico = window.localStorage.getItem("Histórico");
@@ -135,7 +135,7 @@ let ready = $(document).ready(function () {
                     window.localStorage.setItem("Histórico", JSON.stringify(arrayHistorico));
                     clearInterval(intervalo);
                     winner = player;
-                    setTimeout(() => {alert("Parabéns Ganhou!")
+                    setTimeout(() => {alert(idname.html().split(" ").at(1)+" Ganhou!")
                     }, 1000)
                    return
 

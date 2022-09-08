@@ -10,7 +10,7 @@ body {
     display: grid;
     grid-template-columns: repeat(7, 82px);
     grid-template-rows: repeat(6, 66px);
-    width: 600px;
+    width: 590px;
     height: 400px;
     margin: 5% auto;
     justify-content: center;
