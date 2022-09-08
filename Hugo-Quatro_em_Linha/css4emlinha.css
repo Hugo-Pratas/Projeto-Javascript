@@ -8,9 +8,9 @@ body {
 }
 .grid{
     display: grid;
-    grid-template-columns: repeat(7, 90px);
+    grid-template-columns: repeat(7, 82px);
     grid-template-rows: repeat(6, 66px);
-    width: 640px;
+    width: 600px;
     height: 400px;
     margin: 5% auto;
     justify-content: center;
