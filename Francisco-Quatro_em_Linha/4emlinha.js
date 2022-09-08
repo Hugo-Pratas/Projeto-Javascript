@@ -135,7 +135,7 @@ let ready = $(document).ready(function () {
                     window.localStorage.setItem("Histórico", JSON.stringify(arrayHistorico));
                     clearInterval(intervalo);
                     winner = player;
-                    setTimeout(() => {alert(colors[player] + " Ganhou!")
+                    setTimeout(() => {alert("Parabéns Ganhou!")
                     }, 1000)
                    return
 

@@ -8,26 +8,25 @@ body {
 }
 .grid{
     display: grid;
-    grid-template-columns: repeat(7, 10vw);
-    grid-template-rows: repeat(6, 10vw);
-    width: 70vw;
-    height: 60vw;
+    grid-template-columns: repeat(7, 82px);
+    grid-template-rows: repeat(6, 66px);
+    width: 600px;
+    height: 400px;
     margin: 5% auto;
     justify-content: center;
     background-color: saddlebrown;
     border-radius: 25px;
+
+
 }
 .grid{
-    margin-top: 5%;
+    margin-top: 2%;
 }
 .Espaço{
     border: 2px solid;
     background-color: white;
     border-radius: 50%;
 
-}
-#my-canvas {
-    border: 1px solid gray;
 }
 
 .Espaço:hover{
@@ -48,7 +47,7 @@ body {
     display: block;
     margin: 0 auto;
     margin-top: 1%;
-    background-color: #ff4545;
+    background-color: white;
     border: 2px solid transparent;
     box-sizing: border-box;
     cursor:pointer;
@@ -60,16 +59,16 @@ body {
 }
 
 #restart:hover{
-    background-color: #d70000;
+    background-color: gray;
 }
 span{
-    color: yellow;
+    color: white;
 }
 
 h1{
-    font-size: 5vw;
+    font-size: 30px;
     text-align: center;
-    color: red;
+    color: white;
 }
 
 p {
@@ -154,7 +153,7 @@ label {
     position: absolute;
     backdrop-filter: blur(15px);
     width: 100vw;
-    height: 150vh;
+    height: 100vh;
     top: 0;
 }
 
@@ -175,7 +174,7 @@ label {
     position: center;
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
-    font-size: 2vw;
+    font-size: 20px;
     top: 10%;
     display:inline-block;
 
