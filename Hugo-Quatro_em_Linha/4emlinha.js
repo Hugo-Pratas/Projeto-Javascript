@@ -27,6 +27,7 @@ let ready = $(document).ready(function () {
             jogador1 = document.getElementById("nomejogador1").value
             jogador2 = document.getElementById("nomejogador2").value
             if (!charIsLetter(Array.from(jogador1)) || !charIsLetter(Array.from(jogador2))) {
+                alert("O nome so pode conter letras")
                 return
             }
             fillCircle("red")
@@ -76,20 +77,20 @@ let ready = $(document).ready(function () {
 
 
     function contadorTempo() {
-        let agora = Math.floor(Date.now() / 1000); // get the time now
-        let diferenca = agora - inicioContador; // diff in seconds between now and start
-        let m = Math.floor(diferenca / 60); // get minutes value (quotient of diff)
-        let s = Math.floor(diferenca % 60); // get seconds value (remainder of diff)
-        m = addZeroContador(m); // add a leading zero if it's single digit
-        s = addZeroContador(s); // add a leading zero if it's single digit
-        document.getElementById("relogio").innerHTML = m + ":" + s; // update the element where the timer will appear
+        let agora = Math.floor(Date.now() / 1000);
+        let diferenca = agora - inicioContador;
+        let m = Math.floor(diferenca / 60);
+        let s = Math.floor(diferenca % 60);
+        m = addZeroContador(m);
+        s = addZeroContador(s);
+        document.getElementById("relogio").innerHTML = m + ":" + s;
         return [m,s];
     }
 
     function addZeroContador(i) {
         if (i < 10) {
             i = "0" + i
-        }  // add zero in front of numbers < 10
+        }
         return i;
     }
 
@@ -188,7 +189,7 @@ let ready = $(document).ready(function () {
             if (id <= 42) {
                 return true;
             }
-            return false;
+            return id<=42 ;
         }
 
     }
