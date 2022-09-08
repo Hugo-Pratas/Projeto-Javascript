@@ -8,45 +8,25 @@ body {
 }
 
 .botão {
-    border-radius: 10px;
-    font-size: 6vw;
-    width: 10vw;
-    height:10vw;
-}
-
-.botão {
     border-radius: 4px;
-    margin:0.01em;
+    margin: 0.01em;
     border: white;
     box-sizing: border-box;
-    text-align:center;
-    position:relative;
-}
-.botão:active{
-    top:0.1em;
+    text-align: center;
+    position: relative;
+    font-size: 6vw;
+    width: 10vw;
+    height: 10vw;
+    cursor: pointer;
 }
 
-.jogo{
+.botão:active {
+    top: 0.1em;
+}
+
+.jogo {
     margin-top: 5%;
     box-sizing: border-box;
-}
-
-#indicadorJogador {
-    position: fixed;
-    top: 18vh;
-    right: 80vw;
-    float: right;
-}
-
-#jogador {
-    position: fixed;
-    top: 27vh;
-    right: 81vw;
-    float: right;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-    display: inline;
 }
 
 #reiniciar {
@@ -54,23 +34,44 @@ body {
     box-sizing: content-box;
     margin-top: 2%;
     width: 8vw;
-    height:4vw;
-    font-size: 1.5vw;
+    height: 4vw;
+    font-size: 1.4vw;
     color: black;
+    border: 2px solid black;
+    box-shadow: 4px 4px gray;
+    cursor: pointer;
 }
 
-h2 {
+#jogadoresEronda {
+    /*alterar aqui sitio detodos*/
     font-family: 'Helvetica Neue', sans-serif;
-    font-size: 2vw;
-    bottom: 2%;
-    top: 20%;
-    left: 5%;
-    right: 70%;
+    font-size: 2vw; /*altera so ronda*/
     color: white;
+    position: fixed;
+    top: 20vh;
+    right: 83vw;
+    align-content: center;
+    alignment: center;
+    align-items: center;
+    text-align: center;
 }
 
-span {
+#indicadorJogador {
+    font-size: 2vw;
+}
+
+#jogador {
+    position: absolute;
     font-size: 3vw;
+    font-family: 'Helvetica Neue', sans-serif;
+    white-space: nowrap;
+    text-align: center;
+    translate: -50% -1%;
+    line-break: auto;
+}
+
+h4, #contadorRonda {
+    margin-top: 100%;
 }
 
 p {
@@ -99,7 +100,7 @@ p {
     bottom: 10%;
     top: 75%;
     left: 10%;
-    right: 99%;
+    right: 300%;
     width: 8vw;
     height: 8vw;
 }
@@ -114,23 +115,23 @@ h5 {
     margin-bottom: auto;
 }
 
-#form{
+#form {
     height: auto;
     min-height: 20vw;
     width: 25vw;
-    background-color: rgba(40,45,53,1);
+    background-color: rgba(40, 45, 53, 1);
     position: absolute;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     border-radius: 10px;
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 2px 2px 2px 2px;
     overflow: hidden;
 }
 
-#form *{
+#form * {
     font-family: 'Helvetica Neue', sans-serif;
     color: #ffffff;
     outline: none;
@@ -153,7 +154,7 @@ label {
     display: flex;
     height: 70%;
     width: 80%;
-    background-color: rgba(255,255,255,0.07);
+    background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -161,13 +162,15 @@ label {
     font-weight: 300;
     margin: 2vh auto auto auto;
 }
-::placeholder{
+
+::placeholder {
     color: grey;
 }
+
 #nomejogador2 {
     display: flex;
     width: 80%;
-    background-color: rgba(255,255,255,0.07);
+    background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -187,43 +190,23 @@ label {
 #submit {
     background-color: grey;
     color: #eee;
-    border: none;
     margin: auto auto 30%;
     width: 10vw;
     height: 5vh;
     font-size: 1.5vw;
+    cursor: pointer;
 }
 
 #submit:hover {
     background-color: forestgreen;
-}
-
-#doispontos {
-    color: white;
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 2vw;
-    bottom: 0;
-    top: 30%;
-    left: 90%;
-    right: 20%;
+    transition-duration: 0.1s;
 }
 
 #jogadores {
     position: fixed;
     top: 16vh;
-    left: 80vw;
+    left: 75vw;
     float: right;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-
-}
-
-#jogadoresEronda {
-    position: fixed;
-    top: 16vh;
-    right: 80vw;
-    float: left;
     align-content: center;
     align-items: center;
     text-align: center;
@@ -233,48 +216,27 @@ label {
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 3vw;
-    /*bottom: 0;
-    top: 18%;
-    left: 80%;
-    right: 70%;*/
+    margin-bottom: -10%;
 }
 
 #jogador2 {
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 3vw;
-    /*bottom: 0;
-    top: 31%;
-    left: 80%;
-    right: 70%;*/
+    margin-bottom: -10%;
 }
 
 #scoreX {
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
-    font-size: 2vw;
-    /*bottom: 0;
-    top: 40%;
-    left: 84%;
-    right: 70%;*/
+    font-size: 2.5vw;
+    margin-bottom: -10%;
 }
 
 #scoreO {
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
-    font-size: 2vw;
-/*bottom: 0;
-top: 27%;
-left: 84%;
-right: 70%;*/
-}
+    font-size: 2.5vw;
+    margin-bottom: -10%;
 
-h4 {
-position: fixed;
-font-family: 'Helvetica Neue', sans-serif;
-font-size: 2vw;
-    top: 30vh;
-    right: 84vw;
-    float: right;
-color: white;
 }
