@@ -60,7 +60,7 @@ for (let i = 0; i < 9; i++) {
                 setTimeout(() => {
                     if (confirm("O Vencedor é " + idJogador.innerText + ".")) {
                         resetCounters();
-                    }
+                    } else window.location = "../index/index.html";
                 }, 200)
             } else {
                 trocarJogador();
