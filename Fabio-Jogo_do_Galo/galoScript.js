@@ -6,20 +6,21 @@ const idScore1 = document.getElementById('jogador1');
 const idScore2 = document.getElementById('jogador2');
 const resultadoX = document.getElementById('scoreX');
 const resultadoO = document.getElementById('scoreO');
+let ronda = document.getElementById('contadorRonda');
 //Variáveis do estado do jogo
 let jogador = '.';
 let vencedor = '.';
-
 let inicioContador = Math.floor(Date.now() / 1000);
 let intervalo = setInterval(contadorTempo, 1000);
 let jogador1;
 let jogador2;
-let ronda = document.getElementById('contadorRonda');
 let rondaN = 1;
 let scoreX = 0;
 let scoreO = 0;
 let nomeJogador = {"O": undefined, "X": undefined};
 
+//Verifica o nome que foi colocado no popup e define como jogador 1 e 2, se for válido; inicia o contador; esconde o popup;
+//idScore 1 e 2 muda o texto para o input que metemos no popup do jogador 1 e 2, resultadoX e O muda o valor para o aumento do score X e O.
 function verificarNomes() {
     $('#submit').click(function aceitarNomes() {
         jogador1 = document.getElementById("nomejogador1").value
@@ -44,9 +45,10 @@ function verificarNomes() {
 }
 
 verificarNomes();
-botoesBrancos();
+botoesBrancos(); //certifica que os botões estão com fundo branco, para não se ver o . de indefinido.
 
-//Define a resposta ao click aos botoes do jogo
+//Define a resposta ao click aos botoes do jogo; Se '.' então pode alterar para X ou O mediante o que a variável jogador tem (definido na
+//função acima); verifica se há vitoria e atribui ao vencedor o value da variavel;
 for (let i = 0; i < 9; i++) {
     casas[i].addEventListener('click', (event) => {
         if ((event.target.value === '.') && (vencedor === '.')) {
@@ -273,7 +275,7 @@ function sendToLocalStorage() {
 
 //Resultados de cada ronda.
 function contadorJogador(vencedor) {
-    nomeJogador[vencedor];
+    //nomeJogador[vencedor];
     if (vencedor === "X") {
         scoreX++
         resultadoX.innerText = scoreX
