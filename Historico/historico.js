@@ -25,6 +25,7 @@ function getGaloGames(){
             <tr>
                 <th scope="col">Jogo</th>
                 <th scope="col">Nome do Vencedor</th>
+                <th scope="col">Nome do Vencido</th>
                 <th scope="col">Rondas</th>
                 <th scope="col">Resultados</th>
                 <th scope="col">Tempo</th>
@@ -39,6 +40,7 @@ function getGaloGames(){
             '<tr>' +
             `<th scope="row">${jogoGalo.jogo}</th>` +
             `<td>${jogoGalo.vencedor}</td>` +
+            `<td>${jogoGalo.vencido}</td>` +
             `<td>${jogoGalo.rondas}</td>` +
             `<td>${jogoGalo.resultados}</td>` +
             `<td>${jogoGalo.tempo}</td>` +
