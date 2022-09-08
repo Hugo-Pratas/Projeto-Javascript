@@ -1,3 +1,4 @@
+//Versão final
 //Obtendo os elementos do HTML com que vamos interagir.
 const casas = document.getElementsByTagName('input');
 const botaoReiniciar = document.getElementById('reiniciar');
@@ -26,6 +27,7 @@ function verificarNomes() {
         jogador1 = document.getElementById("nomejogador1").value
         jogador2 = document.getElementById("nomejogador2").value
         if (!charIsLetter(Array.from(jogador1)) || !charIsLetter(Array.from(jogador2))) {
+            alert("O nome só pode conter Letras");
             return
         }
         inicioContador = Math.floor(Date.now() / 1000);
@@ -110,7 +112,7 @@ function novaRonda () {
     sortearJogador(jogador1, jogador2);
 }
 
-//Determina tudo o que faz o botão de reiniciar jogo.
+//Determina tudo o que faz o botão de nova ronda.
 botaoReiniciar.addEventListener('click', function() {
     if (vencedor !== ".") {
         rondaN++
@@ -192,14 +194,12 @@ let vitoria = function () {
 
     } else if (casas[0].value !== '.' && casas[1].value !== '.' && casas[2].value !== '.' && casas[3].value !== '.' && casas[4].value !== '.'
         && casas[5].value !== '.' && casas[6].value !== '.' && casas[7].value !== '.' && casas[8].value !== '.') {
-        rondaN++
-        ronda.innerText = rondaN;
+        setTimeout( () => { alert("Esta ronda acabou em empate. Inicia uma nova ronda.")}, 500);
         for (let i = 0; i < 9; i++) {
             casas[i].value = '.';
             casas[i].style.color = "#8E1600";
             casas[i].style.backgroundColor = "#8E1600";
             casas[i].disabled = true;
-            clearInterval(intervalo);
         }
     }
     return '.';
