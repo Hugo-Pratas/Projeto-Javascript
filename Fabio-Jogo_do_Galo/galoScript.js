@@ -110,7 +110,7 @@ function novaRonda () {
 
 //Determina tudo o que faz o botão de reiniciar jogo.
 botaoReiniciar.addEventListener('click', function() {
-    if (vencedor !== ".") {
+    if (vencedor !== "." || vencedor === ".") {
         rondaN++
         ronda.innerText = rondaN;
     }
