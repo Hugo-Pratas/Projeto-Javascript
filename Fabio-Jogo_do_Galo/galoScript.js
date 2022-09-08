@@ -247,8 +247,13 @@ function addZeroContador(i) {
 
 function sendToLocalStorage() {
     let historicoTempo = contadorTempo().join(":");
+    let vencido;
+    if (idJogador.innerText.split(" ").at(0) === jogador1) {
+        vencido = jogador2
+    } else vencido = jogador1
     let listaHistorico = {
         vencedor: idJogador.innerText,
+        vencido: vencido,
         tempo: historicoTempo,
         jogo: "Jogo Do Galo",
         data: new Date().toLocaleString(),
