@@ -112,7 +112,7 @@ function novaRonda () {
 
 //Determina tudo o que faz o botão de reiniciar jogo.
 botaoReiniciar.addEventListener('click', function() {
-    if (vencedor !== "." || vencedor === ".") {
+    if (vencedor !== ".") {
         rondaN++
         ronda.innerText = rondaN;
     }
@@ -275,7 +275,6 @@ function sendToLocalStorage() {
 
 //Resultados de cada ronda.
 function contadorJogador(vencedor) {
-    //nomeJogador[vencedor];
     if (vencedor === "X") {
         scoreX++
         resultadoX.innerText = scoreX
